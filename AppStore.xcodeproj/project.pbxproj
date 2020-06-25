@@ -13,6 +13,14 @@
 		835209F824A4A45B00648779 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 835209F724A4A45B00648779 /* Assets.xcassets */; };
 		835209FB24A4A45B00648779 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 835209F924A4A45B00648779 /* LaunchScreen.storyboard */; };
 		83520A0324A4AB7800648779 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83520A0224A4AB7800648779 /* GoogleService-Info.plist */; };
+		83520A0524A4B79B00648779 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83520A0424A4B79B00648779 /* LoginViewController.swift */; };
+		83520A0824A4C11000648779 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83520A0724A4C11000648779 /* User.swift */; };
+		83520A0B24A4C43100648779 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83520A0A24A4C43100648779 /* Constants.swift */; };
+		83520A0E24A4CB7A00648779 /* FirebaseReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83520A0D24A4CB7A00648779 /* FirebaseReference.swift */; };
+		83520A1024A4D11500648779 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83520A0F24A4D11500648779 /* CreateAccountViewController.swift */; };
+		83520A1224A4F52A00648779 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83520A1124A4F52A00648779 /* ResetPasswordViewController.swift */; };
+		83520A1424A4FAD600648779 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83520A1324A4FAD600648779 /* HomeViewController.swift */; };
+		83520A1624A4FFF900648779 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83520A1524A4FFF900648779 /* StartViewController.swift */; };
 		8C91C1B199A9E71B3591DF5F /* Pods_AppStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF91E9F808514F9D45485E5 /* Pods_AppStore.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +35,14 @@
 		835209FA24A4A45B00648779 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		835209FC24A4A45B00648779 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		83520A0224A4AB7800648779 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		83520A0424A4B79B00648779 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		83520A0724A4C11000648779 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		83520A0A24A4C43100648779 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		83520A0D24A4CB7A00648779 /* FirebaseReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseReference.swift; sourceTree = "<group>"; };
+		83520A0F24A4D11500648779 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		83520A1124A4F52A00648779 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		83520A1324A4FAD600648779 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		83520A1524A4FFF900648779 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		AEF91E9F808514F9D45485E5 /* Pods_AppStore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -82,13 +98,45 @@
 			children = (
 				835209EE24A4A45700648779 /* AppDelegate.swift */,
 				835209F024A4A45700648779 /* SceneDelegate.swift */,
+				83520A0624A4BA0A00648779 /* Controller */,
 				835209F424A4A45700648779 /* Main.storyboard */,
+				83520A0924A4C41B00648779 /* Model */,
 				835209F724A4A45B00648779 /* Assets.xcassets */,
 				835209F924A4A45B00648779 /* LaunchScreen.storyboard */,
+				83520A0C24A4CB6200648779 /* Helpers */,
 				835209FC24A4A45B00648779 /* Info.plist */,
 				83520A0224A4AB7800648779 /* GoogleService-Info.plist */,
 			);
 			path = AppStore;
+			sourceTree = "<group>";
+		};
+		83520A0624A4BA0A00648779 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				83520A0424A4B79B00648779 /* LoginViewController.swift */,
+				83520A0F24A4D11500648779 /* CreateAccountViewController.swift */,
+				83520A1124A4F52A00648779 /* ResetPasswordViewController.swift */,
+				83520A1324A4FAD600648779 /* HomeViewController.swift */,
+				83520A1524A4FFF900648779 /* StartViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		83520A0924A4C41B00648779 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				83520A0724A4C11000648779 /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		83520A0C24A4CB6200648779 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				83520A0A24A4C43100648779 /* Constants.swift */,
+				83520A0D24A4CB7A00648779 /* FirebaseReference.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -225,7 +273,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83520A1024A4D11500648779 /* CreateAccountViewController.swift in Sources */,
+				83520A0B24A4C43100648779 /* Constants.swift in Sources */,
+				83520A0824A4C11000648779 /* User.swift in Sources */,
+				83520A1224A4F52A00648779 /* ResetPasswordViewController.swift in Sources */,
+				83520A0524A4B79B00648779 /* LoginViewController.swift in Sources */,
+				83520A1624A4FFF900648779 /* StartViewController.swift in Sources */,
+				83520A1424A4FAD600648779 /* HomeViewController.swift in Sources */,
 				835209EF24A4A45700648779 /* AppDelegate.swift in Sources */,
+				83520A0E24A4CB7A00648779 /* FirebaseReference.swift in Sources */,
 				835209F124A4A45700648779 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
