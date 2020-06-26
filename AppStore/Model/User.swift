@@ -60,7 +60,7 @@ class User {
         }
     }
     
-    class func createUser(email: String, password: String, completion: @escaping(_ error: Error?) -> Void) {
+    class func createUser(email: String, password: String, completion: @escaping (_ error: Error?) -> Void) {
         
         Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
             
@@ -69,6 +69,18 @@ class User {
             }
             completion(error)
         }
+    }
+    
+    class func logoutUser(completion: @escaping (_ error: Error?) -> Void) {
+        
+        do {
+            try Auth.auth().signOut()
+            completion(nil)
+            
+        } catch let error as NSError {
+            completion(error)
+        }
+        
     }
     
     class func resetPassword(email: String, completion: @escaping(_ error: Error?) -> Void) {
