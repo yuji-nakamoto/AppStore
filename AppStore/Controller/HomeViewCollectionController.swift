@@ -45,6 +45,18 @@ class HomeViewCollectionController: UICollectionViewController {
         }
     }
     
+    //MARK: Prepare function
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue .identifier == "ItemTableVC" {
+            let itemVC = segue .destination as! ItemTableViewController
+            itemVC.category = sender as? Category
+        }
+    }
+    
+    
+    
     //MARK: CollectionView
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -58,6 +70,11 @@ class HomeViewCollectionController: UICollectionViewController {
         cell.generateCell(categoryArray[indexPath.row])
         
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        performSegue(withIdentifier: "ItemTableVC", sender: categoryArray[indexPath.row])
     }
     
 }

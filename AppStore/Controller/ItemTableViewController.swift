@@ -16,6 +16,8 @@ class ItemTableViewController: UIViewController {
     private let sectionInsets = UIEdgeInsets(top: 0, left: 10.0, bottom: 0, right: 10.0)
     private let itemsPerRow: CGFloat = 14
     var categoryArray: [Category] = []
+    var category: Category?
+
     
     
     
