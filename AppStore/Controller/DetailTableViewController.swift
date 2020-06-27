@@ -77,11 +77,7 @@ class DetailTableViewController: UIViewController {
         
         let newCart = Cart()
         
-        if User.currentUserId() == "" {
-            newCart.ownerId = "1234"
-        } else {
-            newCart.ownerId = User.currentUserId()
-        }
+        newCart.ownerId = User.currentUserId()
         newCart.id = UUID().uuidString
         newCart.itemIds = [self.item.id]
         saveCartToFirestore(newCart)

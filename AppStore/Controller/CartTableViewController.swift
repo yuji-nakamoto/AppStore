@@ -132,9 +132,9 @@ extension CartTableViewController: UITableViewDelegate, UITableViewDataSource {
         
         if editingStyle == .delete {
             
-            let itemDelete = Items[indexPath.row]
+            let itemDelete = Items[indexPath.row - 1]
             
-            Items.remove(at: indexPath.row)
+            Items.remove(at: indexPath.row - 1)
             tableView.reloadData()
             
             removeItemFromCart(itemId: itemDelete.id)
