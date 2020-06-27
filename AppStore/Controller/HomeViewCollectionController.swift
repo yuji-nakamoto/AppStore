@@ -19,7 +19,6 @@ class HomeViewCollectionController: UICollectionViewController {
         super.viewDidLoad()
         
 //        createCategorySet()
-        self.title = "App Store"
         loadCategory()
     }
     

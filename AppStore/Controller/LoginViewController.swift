@@ -40,10 +40,18 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func kantanButtonPressed(_ sender: Any) {
-        hud.textLabel.text = "簡単ログインしました"
-        hudSuccess()
-        toTabbarVC()
+        
+        User.createUser(email: "kantan@gmail.com", password: "123456") { (error) in
+            if error != nil {
+                User.loginUser(email: "kantan@gmail.com", password: "123456") { (error) in
+                    self.hud.textLabel.text = "簡単ログインしました"
+                    self.hudSuccess()
+                    self.toTabbarVC()
+                }
+            }
+        }
     }
+    
     
     //MARK: Login user
     
@@ -143,5 +151,5 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-
+    
 }
