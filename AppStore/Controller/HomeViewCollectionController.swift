@@ -49,12 +49,11 @@ class HomeViewCollectionController: UICollectionViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue .identifier == "ItemTableVC" {
-            let itemVC = segue .destination as! ItemTableViewController
+        if segue.identifier == "ItemTableVC" {
+            let itemVC = segue.destination as! ItemTableViewController
             itemVC.category = sender as? Category
         }
     }
-    
     
     
     //MARK: CollectionView
