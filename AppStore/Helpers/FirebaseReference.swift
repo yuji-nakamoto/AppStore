@@ -13,10 +13,9 @@ enum FCollectionReference: String {
     case User
     case Category
     case Items
-    case Basket
+    case Cart
 }
 
 func firebaseRef(_ collectionReference: FCollectionReference) -> CollectionReference {
-    
     return Firestore.firestore().collection(collectionReference.rawValue)
 }
