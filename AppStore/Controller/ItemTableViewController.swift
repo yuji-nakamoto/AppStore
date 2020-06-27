@@ -38,13 +38,20 @@ class ItemTableViewController: UIViewController {
         loadItems()
     }
     
-    @IBAction func press(_ sender: Any) {
+    
+    //MARK: IBAction
+    
+    @IBAction func displaySellButtonPressed(_ sender: Any) {
         
         UIView.animate(withDuration: 0.5) {
             self.sellView.isHidden = !self.sellView.isHidden
         }
     }
     
+    @IBAction func backButtonPressed(_ sender: Any) {
+        
+        self.navigationController?.popViewController(animated: true)
+    }
     
     //MARK: Download Category
     private func loadCategory() {

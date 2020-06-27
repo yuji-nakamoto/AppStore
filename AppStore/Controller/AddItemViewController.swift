@@ -69,6 +69,13 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    @IBAction func backButtonPressed(_ sender: Any) {
+        
+        self.navigationController?.popViewController(animated: true)
+        
+    }
+    
+    
     //MARK: Save Item
     
     private func saveToFirebase() {
@@ -130,7 +137,7 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
         let pleaceholderFontSize = self.view.frame.size.width / 25
         
         pleaceholderLbl.frame = CGRect(x: pleaceholderX, y: pleaceholderY, width: pleaceholderWidth, height: pleaceholderHeight)
-        pleaceholderLbl.text = "商品の特徴や機能など"
+        pleaceholderLbl.text = "商品の特徴や機能、仕様、魅力など"
         pleaceholderLbl.font = UIFont(name: "HelveticaNeue", size: pleaceholderFontSize)
         pleaceholderLbl.textColor = .systemGray3
         pleaceholderLbl.textAlignment = .left

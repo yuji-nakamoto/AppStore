@@ -22,7 +22,7 @@ func uploadImages(images: [UIImage?], itemId: String, comletion: @escaping (_ im
         for image in images {
             
             let fileName = "ItemImages/" + itemId + "/" + "\(nameSuffix)" + "/jpg"
-            let imageData = image!.jpegData(compressionQuality: 0.5)
+            let imageData = image!.jpegData(compressionQuality: 0.1)
             
             saveImageInFirebase(imageData: imageData!, fileName: fileName) { (imageLink) in
                 

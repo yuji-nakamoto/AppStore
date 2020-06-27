@@ -497,7 +497,7 @@
                                 <rect key="frame" x="0.0" y="88" width="375" height="641"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7bm-Gu-rd9">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="541"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="641"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <collectionView key="tableHeaderView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="55W-iI-FiT">
@@ -526,7 +526,7 @@
                                                                     <constraint firstAttribute="width" constant="130" id="hap-2p-BBz"/>
                                                                 </constraints>
                                                             </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NKo-0C-iWk">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NKo-0C-iWk">
                                                                 <rect key="frame" x="0.0" y="101" width="130" height="17"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
@@ -622,8 +622,8 @@
                                             <outlet property="delegate" destination="efC-Js-OHw" id="Lv8-4T-YNs"/>
                                         </connections>
                                     </tableView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hhQ-Le-uaE">
-                                        <rect key="frame" x="0.0" y="541" width="375" height="100"/>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hhQ-Le-uaE">
+                                        <rect key="frame" x="0.0" y="641" width="375" height="100"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mJx-t2-Jnh">
                                                 <rect key="frame" x="20" y="46.666666666666629" width="335" height="35"/>
@@ -674,9 +674,14 @@
                         <viewLayoutGuide key="safeArea" id="khF-9y-qly"/>
                     </view>
                     <navigationItem key="navigationItem" id="vze-wL-IYg">
+                        <barButtonItem key="leftBarButtonItem" image="back" id="g7J-XL-lQ7">
+                            <connections>
+                                <action selector="backButtonPressed:" destination="efC-Js-OHw" id="M3r-0K-ama"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="action" id="FCu-sq-HdQ">
                             <connections>
-                                <action selector="press:" destination="efC-Js-OHw" id="LtP-sv-Gjc"/>
+                                <action selector="displaySellButtonPressed:" destination="efC-Js-OHw" id="17r-n1-bHo"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -896,7 +901,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vOW-8C-kzt"/>
                     </view>
-                    <navigationItem key="navigationItem" title="商品の情報を入力" id="6ra-Cx-TA1"/>
+                    <navigationItem key="navigationItem" title="商品の情報を入力" id="6ra-Cx-TA1">
+                        <barButtonItem key="leftBarButtonItem" image="back" id="HXn-dZ-sze">
+                            <connections>
+                                <action selector="backButtonPressed:" destination="Mwz-lF-f4f" id="9gZ-6x-1Cs"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="ImageSelectButton" destination="GDa-k4-6GT" id="TBi-st-E5X"/>
                         <outlet property="anyLabel" destination="Vcu-JD-eJx" id="KQh-g4-HZA"/>
@@ -949,6 +960,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="back" width="30" height="30"/>
         <image name="house" catalog="system" width="128" height="110"/>
         <image name="house.fill" catalog="system" width="128" height="106"/>
         <namedColor name="original yellow">
