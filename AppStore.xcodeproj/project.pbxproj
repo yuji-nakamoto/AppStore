@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		83478B6B24A7BE0E00C6311C /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83478B6A24A7BE0E00C6311C /* Cart.swift */; };
+		83478B6D24A7DA8300C6311C /* CartTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83478B6C24A7DA8300C6311C /* CartTableViewController.swift */; };
+		83478B6F24A7DAD100C6311C /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83478B6E24A7DAD100C6311C /* CartTableViewCell.swift */; };
+		83478B7124A7DB2F00C6311C /* TotalPriceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83478B7024A7DB2F00C6311C /* TotalPriceTableViewCell.swift */; };
 		8347F25D24A6AE8F006B7D8A /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8347F25C24A6AE8F006B7D8A /* AddItemViewController.swift */; };
 		8347F26724A6EDB9006B7D8A /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8347F26624A6EDB9006B7D8A /* DetailTableViewController.swift */; };
 		8347F26924A6EDE7006B7D8A /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8347F26824A6EDE7006B7D8A /* DetailTableViewCell.swift */; };
@@ -41,6 +44,9 @@
 		2A2417A3414DC41E821DB21D /* Pods-AppStore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStore.debug.xcconfig"; path = "Target Support Files/Pods-AppStore/Pods-AppStore.debug.xcconfig"; sourceTree = "<group>"; };
 		6760AAD86780A4140A351593 /* Pods-AppStore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStore.release.xcconfig"; path = "Target Support Files/Pods-AppStore/Pods-AppStore.release.xcconfig"; sourceTree = "<group>"; };
 		83478B6A24A7BE0E00C6311C /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
+		83478B6C24A7DA8300C6311C /* CartTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewController.swift; sourceTree = "<group>"; };
+		83478B6E24A7DAD100C6311C /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
+		83478B7024A7DB2F00C6311C /* TotalPriceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalPriceTableViewCell.swift; sourceTree = "<group>"; };
 		8347F25C24A6AE8F006B7D8A /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		8347F26624A6EDB9006B7D8A /* DetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
 		8347F26824A6EDE7006B7D8A /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -143,6 +149,7 @@
 				83520A0424A4B79B00648779 /* LoginViewController.swift */,
 				83520A0F24A4D11500648779 /* CreateAccountViewController.swift */,
 				83520A1124A4F52A00648779 /* ResetPasswordViewController.swift */,
+				83478B6C24A7DA8300C6311C /* CartTableViewController.swift */,
 				83520A1324A4FAD600648779 /* HomeViewCollectionController.swift */,
 				8347F25C24A6AE8F006B7D8A /* AddItemViewController.swift */,
 				83520A1524A4FFF900648779 /* StartViewController.swift */,
@@ -182,6 +189,8 @@
 				83520A2224A6266200648779 /* ItemCollectionViewCell.swift */,
 				8347F26824A6EDE7006B7D8A /* DetailTableViewCell.swift */,
 				8347F26A24A6EDF7006B7D8A /* DetailCollectionViewCell.swift */,
+				83478B6E24A7DAD100C6311C /* CartTableViewCell.swift */,
+				83478B7024A7DB2F00C6311C /* TotalPriceTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -321,6 +330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				83520A2924A6633800648779 /* Reachabilty.swift in Sources */,
+				83478B6D24A7DA8300C6311C /* CartTableViewController.swift in Sources */,
 				83520A2324A6266200648779 /* ItemCollectionViewCell.swift in Sources */,
 				83520A1024A4D11500648779 /* CreateAccountViewController.swift in Sources */,
 				83520A0B24A4C43100648779 /* Constants.swift in Sources */,
@@ -336,12 +346,14 @@
 				83520A1F24A625AA00648779 /* ItemTableViewController.swift in Sources */,
 				8347F25D24A6AE8F006B7D8A /* AddItemViewController.swift in Sources */,
 				835209EF24A4A45700648779 /* AppDelegate.swift in Sources */,
+				83478B6F24A7DAD100C6311C /* CartTableViewCell.swift in Sources */,
 				83520A0E24A4CB7A00648779 /* FirebaseReference.swift in Sources */,
 				835209F124A4A45700648779 /* SceneDelegate.swift in Sources */,
 				83520A1A24A5183800648779 /* Category.swift in Sources */,
 				8347F26724A6EDB9006B7D8A /* DetailTableViewController.swift in Sources */,
 				83520A2124A6262400648779 /* ItemTableViewCell.swift in Sources */,
 				83520A2724A6631F00648779 /* Storage.swift in Sources */,
+				83478B7124A7DB2F00C6311C /* TotalPriceTableViewCell.swift in Sources */,
 				83520A1C24A520D800648779 /* HomeCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
