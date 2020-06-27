@@ -23,6 +23,7 @@ class DetailTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "商品の詳細"
         collectionView.delegate = self
         collectionView.dataSource = self
         tableView.tableFooterView = UIView()
@@ -99,7 +100,7 @@ class DetailTableViewController: UIViewController {
                 self.hudError()
                 print("error updating basket", error!.localizedDescription)
             } else {
-                self.hud.textLabel.text = "Add to basket"
+                self.hud.textLabel.text = "カートに追加しました"
                 self.hudSuccess()
             }
         }
@@ -159,7 +160,7 @@ extension DetailTableViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! DetailTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! DetailTableViewCell
         
         cell.nameLabel.text = item.name
         cell.priceLabel.text = "¥\(String(item.price))"
