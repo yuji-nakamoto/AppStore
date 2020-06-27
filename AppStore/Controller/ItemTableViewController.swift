@@ -83,10 +83,10 @@ class ItemTableViewController: UIViewController {
     //MARK: Prepare Function
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "AddItemVC" {
-            
-            let addVC = segue.destination as! AddItemViewController
-            addVC.category = category!
+        if segue.identifier == "detailVC" {
+
+            let detailVC = segue.destination as! DetailTableViewController
+            detailVC.item = sender as? Item
         }
     }
     
@@ -116,7 +116,8 @@ extension ItemTableViewController:  UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        
+        performSegue(withIdentifier: "detailVC", sender: itemArray[indexPath.row])
     }
 }
 
@@ -143,7 +144,8 @@ extension ItemTableViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        
+
+        performSegue(withIdentifier: "detailVC", sender: itemArray[indexPath.row])
     }
+    
 }

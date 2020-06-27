@@ -25,9 +25,14 @@ public let NAME = "name"
 public let IMAGENAME = "imageName"
 public let CATEGORYSET = "categorySet"
 
+//Item
 public let CATEGORYID = "categoryId"
 public let DESCRIPTION = "description"
 public let PRICE = "price"
 public let IMAGELINKS = "imageLinks"
+
+//Cart
+public let OWNERID = "ownerId"
+public let ITEMIDS = "itemIds"
 
 

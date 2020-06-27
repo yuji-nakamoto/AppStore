@@ -37,6 +37,7 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
     
     private func setupUI() {
         
+        self.title = "商品の情報を入力"
         textViewBorder.layer.borderWidth = 1
         textViewBorder.layer.borderColor = UIColor.systemGray4.cgColor
         textViewBorder.layer.cornerRadius = 5
