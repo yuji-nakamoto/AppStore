@@ -11,6 +11,8 @@
 		83478B6D24A7DA8300C6311C /* CartTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83478B6C24A7DA8300C6311C /* CartTableViewController.swift */; };
 		83478B6F24A7DAD100C6311C /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83478B6E24A7DAD100C6311C /* CartTableViewCell.swift */; };
 		83478B7124A7DB2F00C6311C /* TotalPriceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83478B7024A7DB2F00C6311C /* TotalPriceTableViewCell.swift */; };
+		83478B7324A80B8200C6311C /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83478B7224A80B8200C6311C /* SearchTableViewController.swift */; };
+		83478B7524A812D600C6311C /* AlgoliaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83478B7424A812D600C6311C /* AlgoliaService.swift */; };
 		8347F25D24A6AE8F006B7D8A /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8347F25C24A6AE8F006B7D8A /* AddItemViewController.swift */; };
 		8347F26724A6EDB9006B7D8A /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8347F26624A6EDB9006B7D8A /* DetailTableViewController.swift */; };
 		8347F26924A6EDE7006B7D8A /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8347F26824A6EDE7006B7D8A /* DetailTableViewCell.swift */; };
@@ -47,6 +49,8 @@
 		83478B6C24A7DA8300C6311C /* CartTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewController.swift; sourceTree = "<group>"; };
 		83478B6E24A7DAD100C6311C /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
 		83478B7024A7DB2F00C6311C /* TotalPriceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalPriceTableViewCell.swift; sourceTree = "<group>"; };
+		83478B7224A80B8200C6311C /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
+		83478B7424A812D600C6311C /* AlgoliaService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgoliaService.swift; sourceTree = "<group>"; };
 		8347F25C24A6AE8F006B7D8A /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		8347F26624A6EDB9006B7D8A /* DetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
 		8347F26824A6EDE7006B7D8A /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -152,6 +156,7 @@
 				83478B6C24A7DA8300C6311C /* CartTableViewController.swift */,
 				83520A1324A4FAD600648779 /* HomeViewCollectionController.swift */,
 				8347F25C24A6AE8F006B7D8A /* AddItemViewController.swift */,
+				83478B7224A80B8200C6311C /* SearchTableViewController.swift */,
 				83520A1524A4FFF900648779 /* StartViewController.swift */,
 				8347F26624A6EDB9006B7D8A /* DetailTableViewController.swift */,
 				83520A1E24A625AA00648779 /* ItemTableViewController.swift */,
@@ -166,6 +171,7 @@
 				83478B6A24A7BE0E00C6311C /* Cart.swift */,
 				83520A2424A63F0100648779 /* Item.swift */,
 				83520A1924A5183800648779 /* Category.swift */,
+				83478B7424A812D600C6311C /* AlgoliaService.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -330,6 +336,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				83520A2924A6633800648779 /* Reachabilty.swift in Sources */,
+				83478B7524A812D600C6311C /* AlgoliaService.swift in Sources */,
 				83478B6D24A7DA8300C6311C /* CartTableViewController.swift in Sources */,
 				83520A2324A6266200648779 /* ItemCollectionViewCell.swift in Sources */,
 				83520A1024A4D11500648779 /* CreateAccountViewController.swift in Sources */,
@@ -348,6 +355,7 @@
 				835209EF24A4A45700648779 /* AppDelegate.swift in Sources */,
 				83478B6F24A7DAD100C6311C /* CartTableViewCell.swift in Sources */,
 				83520A0E24A4CB7A00648779 /* FirebaseReference.swift in Sources */,
+				83478B7324A80B8200C6311C /* SearchTableViewController.swift in Sources */,
 				835209F124A4A45700648779 /* SceneDelegate.swift in Sources */,
 				83520A1A24A5183800648779 /* Category.swift in Sources */,
 				8347F26724A6EDB9006B7D8A /* DetailTableViewController.swift in Sources */,
