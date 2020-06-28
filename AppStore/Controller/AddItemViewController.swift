@@ -97,16 +97,19 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
                 item.imageLinks = imageLinkArray
                 
                 saveItemToFirestore(item)
+                saveItemToAlgolia(item: item)
                 
                 self.hideLoadingIndicator()
                 self.hud.textLabel.text = "商品を出品しました"
                 self.hudSuccess()
+                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                     self.popTheView()
                 }
             }
         } else {
             saveItemToFirestore(item)
+            saveItemToAlgolia(item: item)
             self.hideLoadingIndicator()
             popTheView()
         }

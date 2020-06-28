@@ -10,6 +10,9 @@ import Foundation
 
 //IDs and Keys
 public let STORAGEREF = "gs://appstore-a772d.appspot.com"
+public let ALGOLIA_APP_ID = "9ILOO66FJJ"
+public let ALGOLIA_SEARCH_KEY = "4a246320dba0ed45f5241a297ba6bc73"
+public let ALGOLOA_ADMIN_KEY = "f778ead3f510f508ec539b046a4109bd"
 
 //User
 public let USERID = "userId"

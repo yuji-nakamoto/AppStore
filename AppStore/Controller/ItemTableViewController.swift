@@ -88,6 +88,10 @@ class ItemTableViewController: UIViewController {
             let detailVC = segue.destination as! DetailTableViewController
             detailVC.item = sender as? Item
         }
+        if segue.identifier == "addItemVC" {
+            let addVC = segue.destination as! AddItemViewController
+            addVC.category = category!
+        }
     }
     
 }
