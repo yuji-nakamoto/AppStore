@@ -1,8 +1,8 @@
 //
-//  AddItemViewController.swift
+//  AddItemTableViewController.swift
 //  AppStore
 //
-//  Created by yuji_nakamoto on 2020/06/27.
+//  Created by yuji_nakamoto on 2020/06/28.
 //  Copyright © 2020 yuji_nakamoto. All rights reserved.
 //
 
@@ -11,7 +11,7 @@ import Gallery
 import JGProgressHUD
 import NVActivityIndicatorView
 
-class AddItemViewController: UIViewController, UITextFieldDelegate {
+class AddItemTableViewController: UITableViewController,UITextFieldDelegate {
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var priceTextField: UITextField!
@@ -37,7 +37,7 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
     
     private func setupUI() {
         
-        self.title = "商品の情報を入力"
+        self.title = "出品"
         textViewBorder.layer.borderWidth = 1
         textViewBorder.layer.borderColor = UIColor.systemGray4.cgColor
         textViewBorder.layer.cornerRadius = 5
@@ -73,9 +73,7 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
     @IBAction func backButtonPressed(_ sender: Any) {
         
         self.navigationController?.popViewController(animated: true)
-        
     }
-    
     
     //MARK: Save Item
     
@@ -92,7 +90,7 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
         
         if itemImages.count > 0 {
             
-            uploadImages(images: itemImages, itemId: item.id) { (imageLinkArray) in
+            itemUploadImages(images: itemImages, itemId: item.id) { (imageLinkArray) in
                 
                 item.imageLinks = imageLinkArray
                 
@@ -115,7 +113,7 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    //MARK: Show Gallery
+    //MARK: Gallery
     private func showImageGallery() {
         
         self.gallery = GalleryController()
@@ -131,11 +129,12 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
     //MARK: Helper Function
     
     private func setupTextView() {
+        
         textView.delegate = self
         pleaceholderLbl.isHidden = false
         
         let pleaceholderX: CGFloat = self.view.frame.size.width / 75
-        let pleaceholderY: CGFloat = -40
+        let pleaceholderY: CGFloat = -130
         let pleaceholderWidth: CGFloat = textView.bounds.width - pleaceholderX
         let pleaceholderHeight: CGFloat = textView.bounds.height
         let pleaceholderFontSize = self.view.frame.size.width / 25
@@ -149,10 +148,6 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
         textView.addSubview(pleaceholderLbl)
     }
     
-    private func dismissKeyboard() {
-        self.view.endEditing(true)
-    }
-    
     private func popTheView() {
         self.navigationController?.popViewController(animated: true)
     }
@@ -164,10 +159,6 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
     }
     
     private func hudError() {
@@ -204,7 +195,7 @@ class AddItemViewController: UIViewController, UITextFieldDelegate {
     
 }
 
-extension AddItemViewController: UITextViewDelegate {
+extension AddItemTableViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         
@@ -219,7 +210,7 @@ extension AddItemViewController: UITextViewDelegate {
     }
 }
 
-extension AddItemViewController: GalleryControllerDelegate {
+extension AddItemTableViewController: GalleryControllerDelegate {
     func galleryController(_ controller: GalleryController, didSelectImages images: [Image]) {
         
         if images.count > 0 {
@@ -243,6 +234,3 @@ extension AddItemViewController: GalleryControllerDelegate {
         controller.dismiss(animated: true, completion: nil)
     }
 }
-
-
-

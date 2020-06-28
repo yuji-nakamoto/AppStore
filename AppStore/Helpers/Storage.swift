@@ -11,7 +11,7 @@ import FirebaseStorage
 
 let storage = Storage.storage()
 
-func uploadImages(images: [UIImage?], itemId: String, comletion: @escaping (_ imageLinks: [String]) -> Void) {
+func itemUploadImages(images: [UIImage?], itemId: String, comletion: @escaping (_ imageLinks: [String]) -> Void) {
     
     if Reachabilty.HasConnection() {
         
@@ -36,10 +36,8 @@ func uploadImages(images: [UIImage?], itemId: String, comletion: @escaping (_ im
                     }
                 }
             }
-            
             nameSuffix += 1
         }
-        
     } else {
         print("No Internet Connection")
     }

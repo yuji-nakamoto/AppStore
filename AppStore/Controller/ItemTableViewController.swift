@@ -89,7 +89,7 @@ class ItemTableViewController: UIViewController {
             detailVC.item = sender as? Item
         }
         if segue.identifier == "addItemVC" {
-            let addVC = segue.destination as! AddItemViewController
+            let addVC = segue.destination as! AddItemTableViewController
             addVC.category = category!
         }
     }

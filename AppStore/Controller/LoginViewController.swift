@@ -41,17 +41,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func kantanButtonPressed(_ sender: Any) {
         
-        showLoadingIndicator()
-        User.createUser(email: "kantan@gmail.com", password: "123456") { (error) in
-            if error != nil {
-                User.loginUser(email: "kantan@gmail.com", password: "123456") { (error) in
-                    self.hideLoadingIndicator()
-                    self.hud.textLabel.text = "簡単ログインしました"
-                    self.hudSuccess()
-                    self.toTabbarVC()
-                }
-            }
-        }
+        loginKantanUser()
     }
     
     
@@ -72,6 +62,29 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             self.hud.textLabel.text = "ログインに成功しました"
             self.hudSuccess()
             self.toTabbarVC()
+        }
+    }
+    
+    private func loginKantanUser() {
+        
+        showLoadingIndicator()
+        User.createUser(email: "kantan@gmail.com", password: "123456") { (error) in
+            if error != nil {
+                
+                User.loginUser(email: "kantan@gmail.com", password: "123456") { (error) in
+                    
+                    if error == nil {
+                        
+                        self.hideLoadingIndicator()
+                        self.hud.textLabel.text = "簡単ログインしました"
+                        self.hudSuccess()
+                        self.toTabbarVC()
+                    }
+                }
+            } else {
+                self.hideLoadingIndicator()
+                self.hudError()
+            }
         }
     }
     
