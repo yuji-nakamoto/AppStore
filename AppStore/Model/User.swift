@@ -126,7 +126,7 @@ class User {
 
 //MARL: Helper Function
 
-func userDictionaryFrom(user: User) -> NSDictionary {
+func userDictionaryFrom(_ user: User) -> NSDictionary {
     
     return NSDictionary(objects: [user.userId, user.email, user.firstName, user.lastName, user.fullName, user.profileImageUrl, user.headerImageUrl, user.prefectures, user.city, user.apartment, user.fullAddress, user.purchasedItemId], forKeys: [USERID as NSCopying, EMAIL as NSCopying, FIRSTNAME as NSCopying, LASTNAME as NSCopying, FULLNAME as NSCopying, PROFILEIMAGEURL as NSCopying, HEADERIMAGEURL as NSCopying, PREFECTURES as NSCopying, CITY  as NSCopying, APARTMENT as NSCopying, FULLADDRESS as NSCopying, PURCHAESDITEMID as NSCopying])
 }
@@ -145,16 +145,16 @@ func downloadUserFromFirestore(userId: String, email: String) {
             saveUserLocally(userDict: snapshot.data()! as NSDictionary)
         } else {
             let user = User(userId: userId, email: email, firstName: "", lastName: "")
-            saveUserLocally(userDict: userDictionaryFrom(user: user))
-            saveUserToFirestore(user: user)
+            saveUserLocally(userDict: userDictionaryFrom(user))
+            saveUserToFirestore(user)
         }
     }
 }
 
 //MARK: Save user to firebase
-func saveUserToFirestore(user: User) {
+func saveUserToFirestore(_ user: User) {
     
-    firebaseRef(.User).document(user.userId).setData(userDictionaryFrom(user: user) as! [String: Any]) { (error) in
+    firebaseRef(.User).document(user.userId).setData(userDictionaryFrom(user) as! [String: Any]) { (error) in
         
         if error != nil {
             print("error saving user: \(error!.localizedDescription)")

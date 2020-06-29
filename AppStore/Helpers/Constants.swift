@@ -39,7 +39,7 @@ public let CATEGORYSET = "categorySet"
 public let CATEGORYID = "categoryId"
 public let DESCRIPTION = "description"
 public let PRICE = "price"
-public let IMAGELINKS = "imageLinks"
+public let IMAGEURLS = "imageUrls"
 
 //Cart
 public let OWNERID = "ownerId"

@@ -90,9 +90,9 @@ class AddItemTableViewController: UITableViewController,UITextFieldDelegate {
         
         if itemImages.count > 0 {
             
-            itemUploadImages(images: itemImages, itemId: item.id) { (imageLinkArray) in
+            uploadItemImages(images: itemImages, itemId: item.id) { (imageUrlArray) in
                 
-                item.imageLinks = imageLinkArray
+                item.imageUrls = imageUrlArray
                 
                 saveItemToFirestore(item)
                 saveItemToAlgolia(item: item)

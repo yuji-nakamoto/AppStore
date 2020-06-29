@@ -61,8 +61,8 @@ class DetailTableViewController: UIViewController {
     //MARK: Load Picture
     private func downloadPicture() {
         
-        if item != nil && item.imageLinks != nil {
-            downloadImages(imageUrls: item.imageLinks) { (allImages) in
+        if item != nil && item.imageUrls != nil {
+            downloadImages(imageUrls: item.imageUrls) { (allImages) in
                 if allImages.count > 0 {
                     self.itemImages = allImages as! [UIImage]
                     self.collectionView.reloadData()

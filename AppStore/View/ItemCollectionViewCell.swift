@@ -17,9 +17,9 @@ class ItemCollectionViewCell: UICollectionViewCell {
     func generateCell(_ item: Item) {
         nameLabel.text = item.name
         
-        if item.imageLinks != nil && item.imageLinks.count > 0 {
+        if item.imageUrls != nil && item.imageUrls.count > 0 {
 
-            downloadImages(imageUrls: [item.imageLinks.first!]) { (images) in
+            downloadImages(imageUrls: [item.imageUrls.first!]) { (images) in
                 self.imageView.image = images.first as? UIImage
             }
         }
