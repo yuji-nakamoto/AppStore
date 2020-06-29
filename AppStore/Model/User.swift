@@ -15,7 +15,12 @@ class User {
     var email: String
     var firstName: String
     var lastName: String
-    var address: String
+    var profileImageUrl: String
+    var headerImageUrl: String
+    var prefectures: String
+    var city: String
+    var apartment: String
+    var fullAddress: String
     var purchasedItemId: [String]
     var fullName: String
     
@@ -25,7 +30,12 @@ class User {
         self.firstName = firstName
         self.lastName = lastName
         self.fullName = firstName + lastName
-        self.address = ""
+        self.profileImageUrl = ""
+        self.headerImageUrl = ""
+        self.prefectures = ""
+        self.city = ""
+        self.apartment = ""
+        self.fullAddress = ""
         self.purchasedItemId = []
     }
     
@@ -35,13 +45,30 @@ class User {
         firstName = dict[FIRSTNAME] as? String ?? ""
         lastName = dict[LASTNAME] as? String ?? ""
         fullName = firstName + lastName
-        address = dict[ADDRESS] as? String ?? ""
+        profileImageUrl = dict[PROFILEIMAGEURL] as? String ?? ""
+        headerImageUrl = dict[HEADERIMAGEURL] as? String ?? ""
+        prefectures = dict[PREFECTURES] as? String ?? ""
+        city = dict[CITY] as? String ?? ""
+        apartment = dict[APARTMENT] as? String ?? ""
+        fullAddress = prefectures + city + apartment
         purchasedItemId = dict[PURCHAESDITEMID] as? [String] ?? []
         
     }
     
+    //MARK: Return User
+    
     class func currentUserId() -> String {
         return Auth.auth().currentUser!.uid
+    }
+    
+    class func currentUser() -> User? {
+        
+        if Auth.auth().currentUser != nil {
+            if let dictionary = UserDefaults.standard.object(forKey: CURRENTUSER) {
+                return User.init(dict: dictionary as! NSDictionary)
+            }
+        }
+        return nil
     }
     
     //MARK: Login function
@@ -75,12 +102,13 @@ class User {
         
         do {
             try Auth.auth().signOut()
+            UserDefaults.standard.removeObject(forKey: CURRENTUSER)
+            UserDefaults.standard.synchronize()
             completion(nil)
             
         } catch let error as NSError {
             completion(error)
         }
-        
     }
     
     class func resetPassword(email: String, completion: @escaping(_ error: Error?) -> Void) {
@@ -93,16 +121,14 @@ class User {
             completion(error)
         }
     }
+    
 }
-
-
-
 
 //MARL: Helper Function
 
-func userDictionaryFrom(user: User) -> NSDictionary {
+func userDictionaryFrom(_ user: User) -> NSDictionary {
     
-    return NSDictionary(objects: [user.userId, user.email, user.firstName, user.lastName, user.fullName, user.address, user.purchasedItemId], forKeys: [USERID as NSCopying, EMAIL as NSCopying, FIRSTNAME as NSCopying, LASTNAME as NSCopying, FULLNAME as NSCopying, ADDRESS as NSCopying, PURCHAESDITEMID as NSCopying])
+    return NSDictionary(objects: [user.userId, user.email, user.firstName, user.lastName, user.fullName, user.profileImageUrl, user.headerImageUrl, user.prefectures, user.city, user.apartment, user.fullAddress, user.purchasedItemId], forKeys: [USERID as NSCopying, EMAIL as NSCopying, FIRSTNAME as NSCopying, LASTNAME as NSCopying, FULLNAME as NSCopying, PROFILEIMAGEURL as NSCopying, HEADERIMAGEURL as NSCopying, PREFECTURES as NSCopying, CITY  as NSCopying, APARTMENT as NSCopying, FULLADDRESS as NSCopying, PURCHAESDITEMID as NSCopying])
 }
 
 //MARK: Download User
@@ -111,23 +137,53 @@ func downloadUserFromFirestore(userId: String, email: String) {
     
     firebaseRef(.User).document(userId).getDocument { (snapshot, error) in
         
-        if error != nil {
-            
-            print("error: download user: \(error!.localizedDescription)")
+        guard let snapshot = snapshot else {
             return
         }
-        let user = User(userId: userId, email: email, firstName: "", lastName: "")
-        saveUserToFirestore(user: user)
+        if snapshot.exists {
+            
+            saveUserLocally(userDict: snapshot.data()! as NSDictionary)
+        } else {
+            let user = User(userId: userId, email: email, firstName: "", lastName: "")
+            saveUserLocally(userDict: userDictionaryFrom(user))
+            saveUserToFirestore(user)
+        }
     }
 }
 
 //MARK: Save user to firebase
-func saveUserToFirestore(user: User) {
+func saveUserToFirestore(_ user: User) {
     
-    firebaseRef(.User).document(user.userId).setData(userDictionaryFrom(user: user) as! [String: Any]) { (error) in
+    firebaseRef(.User).document(user.userId).setData(userDictionaryFrom(user) as! [String: Any]) { (error) in
         
         if error != nil {
             print("error saving user: \(error!.localizedDescription)")
+        }
+    }
+}
+
+func saveUserLocally(userDict: NSDictionary) {
+    
+    UserDefaults.standard.set(userDict, forKey: CURRENTUSER)
+    UserDefaults.standard.synchronize()
+}
+
+//MARK: Update User
+
+func updateCurrentUserFierstore(withValues: [String: Any], completion: @escaping (_ error: Error?) -> Void) {
+    
+    if let dict = UserDefaults.standard.object(forKey: CURRENTUSER) {
+        
+        let userObject = (dict as! NSDictionary).mutableCopy() as! NSMutableDictionary
+        userObject.setValuesForKeys(withValues)
+        
+        firebaseRef(.User).document(User.currentUserId()).updateData(withValues) { (error) in
+            
+            completion(error)
+            
+            if error == nil {
+                saveUserLocally(userDict: userObject)
+            }
         }
     }
 }

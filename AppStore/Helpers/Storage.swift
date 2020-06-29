@@ -7,16 +7,17 @@
 //
 
 import Foundation
+import Firebase
 import FirebaseStorage
 
 let storage = Storage.storage()
 
-func uploadImages(images: [UIImage?], itemId: String, comletion: @escaping (_ imageLinks: [String]) -> Void) {
+func uploadItemImages(images: [UIImage?], itemId: String, comletion: @escaping (_ imageUrls: [String]) -> Void) {
     
     if Reachabilty.HasConnection() {
         
         var uploadedImagesCount = 0
-        var imageLinksArray: [String] = []
+        var imageUrlsArray: [String] = []
         var nameSuffix = 0
         
         for image in images {
@@ -24,26 +25,67 @@ func uploadImages(images: [UIImage?], itemId: String, comletion: @escaping (_ im
             let fileName = "ItemImages/" + itemId + "/" + "\(nameSuffix)" + "/jpg"
             let imageData = image!.jpegData(compressionQuality: 0.1)
             
-            saveImageInFirebase(imageData: imageData!, fileName: fileName) { (imageLink) in
+            saveImageInFirebase(imageData: imageData!, fileName: fileName) { (imageUrl) in
                 
-                if imageLink != nil {
+                if imageUrl != nil {
                     
-                    imageLinksArray.append(imageLink!)
+                    imageUrlsArray.append(imageUrl!)
                     uploadedImagesCount += 1
                     if uploadedImagesCount == images.count {
                         
-                        comletion(imageLinksArray)
+                        comletion(imageUrlsArray)
                     }
                 }
             }
-            
             nameSuffix += 1
         }
-        
     } else {
         print("No Internet Connection")
     }
 }
+
+func uploadProfileImages(image: UIImage?, completion: @escaping (_ imageUrl: String) -> Void) {
+    
+    if Reachabilty.HasConnection() {
+        
+        var imageUrlString: String!
+        let fileName = "ProfileImage/\(User.currentUserId())/jpg"
+        let imageData = image!.jpegData(compressionQuality: 0.1)
+        
+        saveImageInFirebase(imageData: imageData!, fileName: fileName) { (imageUrl) in
+            
+            if imageUrl != nil {
+                
+                imageUrlString = imageUrl!
+                completion(imageUrlString)
+            }
+        }
+    } else {
+        print("No Internet Connection")
+    }
+}
+
+func uploadHeaderImages(image: UIImage?, completion: @escaping (_ imageUrl: String) -> Void) {
+    
+    if Reachabilty.HasConnection() {
+        
+        var imageUrlString: String!
+        let fileName = "HeaderImage/\(User.currentUserId())/jpg"
+        let imageData = image!.jpegData(compressionQuality: 0.1)
+        
+        saveImageInFirebase(imageData: imageData!, fileName: fileName) { (imageUrl) in
+            
+            if imageUrl != nil {
+                
+                imageUrlString = imageUrl!
+                completion(imageUrlString)
+            }
+        }
+    } else {
+        print("No Internet Connection")
+    }
+}
+
 
 func saveImageInFirebase(imageData: Data, fileName: String, completion: @escaping (_ imageLink: String?) -> Void) {
     

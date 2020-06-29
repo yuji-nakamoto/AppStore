@@ -17,7 +17,7 @@ class Item {
     var name: String!
     var descriprion: String!
     var price: Int!
-    var imageLinks: [String]!
+    var imageUrls: [String]!
     
     init() {
         
@@ -30,7 +30,7 @@ class Item {
         name = dict[NAME] as? String
         descriprion = dict[DESCRIPTION] as? String
         price = dict[PRICE] as? Int
-        imageLinks = dict[IMAGELINKS] as? [String]
+        imageUrls = dict[IMAGEURLS] as? [String]
     }
 }
 
@@ -44,7 +44,7 @@ func saveItemToFirestore(_ item: Item) {
 //MARK: Helper functions
 
 func itemDictionaryFrom(_ item: Item) -> NSDictionary {
-    return NSDictionary(objects: [item.id ?? "", item.categoryId ?? "", item.name ?? "", item.descriprion ?? "", item.price ?? "", item.imageLinks ?? ""], forKeys: [USERID as NSCopying, CATEGORYID as NSCopying, NAME as NSCopying, DESCRIPTION as NSCopying, PRICE as NSCopying, IMAGELINKS as NSCopying])
+    return NSDictionary(objects: [item.id ?? "", item.categoryId ?? "", item.name ?? "", item.descriprion ?? "", item.price ?? "", item.imageUrls ?? ""], forKeys: [USERID as NSCopying, CATEGORYID as NSCopying, NAME as NSCopying, DESCRIPTION as NSCopying, PRICE as NSCopying, IMAGEURLS as NSCopying])
 }
 
 //MARK: Download Func

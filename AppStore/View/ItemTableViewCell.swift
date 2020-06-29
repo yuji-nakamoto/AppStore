@@ -21,9 +21,9 @@ class ItemTableViewCell: UITableViewCell {
         priceLabel.text = "¥\(String(item.price))"
         descriptionLabel.text = item.descriprion
         
-        if item.imageLinks != nil && item.imageLinks.count > 0 {
+        if item.imageUrls != nil && item.imageUrls.count > 0 {
 
-            downloadImages(imageUrls: [item.imageLinks.first!]) { (images) in
+            downloadImages(imageUrls: [item.imageUrls.first!]) { (images) in
                 self.tableImageView.image = images.first as? UIImage
             }
         }

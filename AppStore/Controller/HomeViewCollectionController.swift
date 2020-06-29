@@ -22,19 +22,6 @@ class HomeViewCollectionController: UICollectionViewController {
         loadCategory()
     }
     
-    //MARK: IBAction
-    
-    @IBAction func logoutButtonPressed(_ sender: Any) {
-        
-        User.logoutUser { (error) in
-            if error != nil {
-                print("error logout user: \(error!.localizedDescription)")
-            }
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginVC")
-            self.present(loginVC, animated: true, completion: nil)
-        }
-    }
     
     //MARK: Download category
     private func loadCategory() {

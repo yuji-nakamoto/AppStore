@@ -20,8 +20,15 @@ public let EMAIL = "email"
 public let FIRSTNAME = "firstName"
 public let LASTNAME = "lastName"
 public let FULLNAME = "fullName"
-public let ADDRESS = "address"
+public let PROFILEIMAGEURL = "profileImageUrl"
+public let HEADERIMAGEURL = "headerImageUrl"
+public let PREFECTURES = "prefectures"
+public let CITY = "city"
+public let APARTMENT = "apartment"
+public let FULLADDRESS = "fullAddress"
 public let PURCHAESDITEMID = "purchasedItemId"
+public let CURRENTUSER = "currentUser"
+
 
 //Categoty
 public let NAME = "name"
@@ -32,7 +39,7 @@ public let CATEGORYSET = "categorySet"
 public let CATEGORYID = "categoryId"
 public let DESCRIPTION = "description"
 public let PRICE = "price"
-public let IMAGELINKS = "imageLinks"
+public let IMAGEURLS = "imageUrls"
 
 //Cart
 public let OWNERID = "ownerId"
