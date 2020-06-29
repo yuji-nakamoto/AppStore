@@ -42,6 +42,7 @@ class ProfileTableViewController: UITableViewController {
         setupUI()
     }
     
+    
     //MARK: Setup UI
     
     private func setupUI() {

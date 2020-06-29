@@ -66,7 +66,7 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
             }
             
         } else {
-            self.hud.textLabel.text = "全ての項目を入力して下さい"
+            self.hud.textLabel.text = "必須項目を入力して下さい"
             self.hudError()
         }
     }
@@ -88,7 +88,7 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     
     private func registerButtonChange() {
         
-        if firstNameTextFiled.text != "" && lastNameTextField.text != "" && prefecturesTextField.text != "" && cityTextField.text != "" && apartmentTextField.text != "" {
+        if textFieldHaveText() == true {
             
             registerButton.titleLabel?.text = "住所を変更"
             topLabel.text = "住所を変更する"
@@ -97,7 +97,7 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     
     private func textFieldHaveText() -> Bool {
         
-        return (firstNameTextFiled.text != "" && lastNameTextField.text != "" && prefecturesTextField.text != "" && cityTextField.text != "" && apartmentTextField.text != "")
+        return (firstNameTextFiled.text != "" && lastNameTextField.text != "" && prefecturesTextField.text != "" && cityTextField.text != "")
     }
     
     private func textFieldDelegate() {
