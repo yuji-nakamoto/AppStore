@@ -7,31 +7,30 @@
 //
 
 import UIKit
+import EmptyDataSet_Swift
 
 class CartTableViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var cashRegisterButton: UIButton!
     
-    var Items: [Item] = []
+    var items: [Item] = []
     var cart: Cart!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.tableFooterView = UIView()
-        cashRegisterButton.layer.cornerRadius = 10
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        setupUI()
         loadCartFromFirestore()
     }
-    
-    //MARK: IBAction
-   
-    
     
     //MARK: Load Cart Items
     
@@ -48,11 +47,26 @@ class CartTableViewController: UIViewController {
         
         if cart != nil {
             downloadItems(cart!.itemIds) { (Items) in
-                self.Items = Items
+                self.items = Items
                 self.tableView.reloadData()
+                self.setupUI()
             }
         } else {
             self.tableView.reloadData()
+            self.setupUI()
+        }
+    }
+    
+    //MARK: Setup UI
+    
+    private func setupUI() {
+        
+        cashRegisterButton.layer.cornerRadius = 5
+        
+        if items.count == 0 {
+            cashRegisterButton.isHidden = true
+        } else {
+            cashRegisterButton.isHidden = false
         }
     }
     
@@ -87,7 +101,7 @@ class CartTableViewController: UIViewController {
 extension CartTableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1 + Items.count
+        return items.count == 0 ? 0 : 1 + items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -97,19 +111,19 @@ extension CartTableViewController: UITableViewDelegate, UITableViewDataSource {
         
         if indexNumber == 0 {
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TotalPriceTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! TotalPriceTableViewCell
             
-            for item in Items {
+            for item in items {
                 totalPrice += item.price
             }
-            cell.totalLabel.text = "(\(String(Items.count))個の商品)(税込):"
+            cell.totalLabel.text = "(\(String(items.count))個の商品)(税込):"
             cell.totalPriceLabel.text = "¥\(String(totalPrice))"
             return cell
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell2", for: indexPath) as! CartTableViewCell
         
-        cell.generateCell(Items[indexPath.row - 1])
+        cell.generateCell(items[indexPath.row - 1])
         return cell
     }
     
@@ -125,7 +139,7 @@ extension CartTableViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
-        showItemView(Items[indexPath.row - 1])
+        showItemView(items[indexPath.row - 1])
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -136,9 +150,9 @@ extension CartTableViewController: UITableViewDelegate, UITableViewDataSource {
         
         if editingStyle == .delete {
             
-            let itemDelete = Items[indexPath.row - 1]
+            let itemDelete = items[indexPath.row - 1]
             
-            Items.remove(at: indexPath.row - 1)
+            items.remove(at: indexPath.row - 1)
             tableView.reloadData()
             
             removeItemFromCart(itemId: itemDelete.id)
@@ -154,4 +168,19 @@ extension CartTableViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+}
+
+extension CartTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
+
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.label]
+        return NSAttributedString(string: "お客様のショッピングカートに商品はありません。", attributes: attributes)
+    }
+
+    
+    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        
+        return NSAttributedString(string: "商品カテゴリー、または検索から買い物が行えます。")
+    }
 }

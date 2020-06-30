@@ -43,8 +43,8 @@ class AddItemTableViewController: UITableViewController,UITextFieldDelegate {
         textViewBorder.layer.cornerRadius = 5
         anyLabel.layer.borderWidth = 1
         anyLabel.layer.borderColor = UIColor.systemGray.cgColor
-        ImageSelectButton.layer.cornerRadius = 10
-        sellButton.layer.cornerRadius = 10
+        ImageSelectButton.layer.cornerRadius = 5
+        sellButton.layer.cornerRadius = 5
         
         nameTextField.delegate = self
         priceTextField.delegate = self

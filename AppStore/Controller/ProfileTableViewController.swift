@@ -27,12 +27,10 @@ class ProfileTableViewController: UITableViewController {
     let currentUser = User.currentUser()!
     let picker = UIImagePickerController()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.tableFooterView = UIView()
-        profileImageButton.layer.cornerRadius = 5
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -41,12 +39,12 @@ class ProfileTableViewController: UITableViewController {
         loadUserInfo()
         setupUI()
     }
-    
+
     
     //MARK: Setup UI
     
     private func setupUI() {
-        
+        profileImageButton.layer.cornerRadius = 5
         profileImageView.layer.cornerRadius = 35
         profileImageView.layer.borderWidth = 3
         profileImageView.layer.borderColor = UIColor.white.cgColor

@@ -50,7 +50,7 @@ class User {
         prefectures = dict[PREFECTURES] as? String ?? ""
         city = dict[CITY] as? String ?? ""
         apartment = dict[APARTMENT] as? String ?? ""
-        fullAddress = prefectures + city + apartment
+        fullAddress = prefectures + city
         purchasedItemId = dict[PURCHAESDITEMID] as? [String] ?? []
         
     }

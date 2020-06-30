@@ -19,6 +19,9 @@
 		8347F26724A6EDB9006B7D8A /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8347F26624A6EDB9006B7D8A /* DetailTableViewController.swift */; };
 		8347F26924A6EDE7006B7D8A /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8347F26824A6EDE7006B7D8A /* DetailTableViewCell.swift */; };
 		8347F26B24A6EDF7006B7D8A /* DetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8347F26A24A6EDF7006B7D8A /* DetailCollectionViewCell.swift */; };
+		83489CAF24AA74EA002A8EA3 /* PurchasedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83489CAE24AA74EA002A8EA3 /* PurchasedTableViewController.swift */; };
+		83489CB124AA758D002A8EA3 /* PurchasedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83489CB024AA758D002A8EA3 /* PurchasedTableViewCell.swift */; };
+		83489CB324AA7ECB002A8EA3 /* PurchaseConfirmationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83489CB224AA7ECB002A8EA3 /* PurchaseConfirmationTableViewController.swift */; };
 		835209EF24A4A45700648779 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835209EE24A4A45700648779 /* AppDelegate.swift */; };
 		835209F124A4A45700648779 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835209F024A4A45700648779 /* SceneDelegate.swift */; };
 		835209F624A4A45700648779 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 835209F424A4A45700648779 /* Main.storyboard */; };
@@ -59,6 +62,9 @@
 		8347F26624A6EDB9006B7D8A /* DetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
 		8347F26824A6EDE7006B7D8A /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
 		8347F26A24A6EDF7006B7D8A /* DetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCollectionViewCell.swift; sourceTree = "<group>"; };
+		83489CAE24AA74EA002A8EA3 /* PurchasedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasedTableViewController.swift; sourceTree = "<group>"; };
+		83489CB024AA758D002A8EA3 /* PurchasedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasedTableViewCell.swift; sourceTree = "<group>"; };
+		83489CB224AA7ECB002A8EA3 /* PurchaseConfirmationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseConfirmationTableViewController.swift; sourceTree = "<group>"; };
 		835209EB24A4A45700648779 /* AppStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		835209EE24A4A45700648779 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		835209F024A4A45700648779 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -166,6 +172,8 @@
 				83520A1E24A625AA00648779 /* ItemTableViewController.swift */,
 				83478B7624A831EC00C6311C /* ProfileTableViewController.swift */,
 				83478B7A24A8512800C6311C /* EditTableViewController.swift */,
+				83489CAE24AA74EA002A8EA3 /* PurchasedTableViewController.swift */,
+				83489CB224AA7ECB002A8EA3 /* PurchaseConfirmationTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -203,6 +211,7 @@
 				8347F26A24A6EDF7006B7D8A /* DetailCollectionViewCell.swift */,
 				83478B6E24A7DAD100C6311C /* CartTableViewCell.swift */,
 				83478B7024A7DB2F00C6311C /* TotalPriceTableViewCell.swift */,
+				83489CB024AA758D002A8EA3 /* PurchasedTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -357,14 +366,17 @@
 				83478B7B24A8512800C6311C /* EditTableViewController.swift in Sources */,
 				8347F26B24A6EDF7006B7D8A /* DetailCollectionViewCell.swift in Sources */,
 				83478B6B24A7BE0E00C6311C /* Cart.swift in Sources */,
+				83489CAF24AA74EA002A8EA3 /* PurchasedTableViewController.swift in Sources */,
 				83520A1F24A625AA00648779 /* ItemTableViewController.swift in Sources */,
 				835209EF24A4A45700648779 /* AppDelegate.swift in Sources */,
 				83478B7724A831EC00C6311C /* ProfileTableViewController.swift in Sources */,
 				83478B6F24A7DAD100C6311C /* CartTableViewCell.swift in Sources */,
+				83489CB324AA7ECB002A8EA3 /* PurchaseConfirmationTableViewController.swift in Sources */,
 				83520A0E24A4CB7A00648779 /* FirebaseReference.swift in Sources */,
 				83478B7324A80B8200C6311C /* SearchTableViewController.swift in Sources */,
 				835209F124A4A45700648779 /* SceneDelegate.swift in Sources */,
 				83520A1A24A5183800648779 /* Category.swift in Sources */,
+				83489CB124AA758D002A8EA3 /* PurchasedTableViewCell.swift in Sources */,
 				8347F26724A6EDB9006B7D8A /* DetailTableViewController.swift in Sources */,
 				83520A2124A6262400648779 /* ItemTableViewCell.swift in Sources */,
 				83478B7924A836CE00C6311C /* AddItemTableViewController.swift in Sources */,

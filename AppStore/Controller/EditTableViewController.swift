@@ -19,21 +19,22 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var topLabel: UILabel!
     
-    
+    let profileVC = ProfileTableViewController()
+    let purConVC = PurchaseConfirmationTableViewController()
     var hud = JGProgressHUD(style: .dark)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        registerButton.layer.cornerRadius = 10
+        registerButton.layer.cornerRadius = 5
         tableView.tableFooterView = UIView()
         textFieldDelegate()
-        loadUserInfo()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        loadUserInfo()
         registerButtonChange()
     }
     
@@ -53,7 +54,6 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
             updateCurrentUserFierstore(withValues: withValues) { (error) in
                 
                 if error == nil {
-                    
                     self.hud.textLabel.text = "住所を登録しました"
                     self.hudSuccess()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
@@ -125,6 +125,14 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         hud.indicatorView = JGProgressHUDSuccessIndicatorView()
         hud.show(in: self.view)
         hud.dismiss(afterDelay: 2.0)
+    }
+    
+    private func reloadView() {
+        
+        self.profileVC.loadView()
+        self.profileVC.viewDidLoad()
+        self.purConVC.loadView()
+        self.purConVC.viewDidLoad()
     }
     
 }

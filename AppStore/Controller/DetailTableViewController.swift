@@ -27,7 +27,7 @@ class DetailTableViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         tableView.tableFooterView = UIView()
-        cartButton.layer.cornerRadius = 10
+        cartButton.layer.cornerRadius = 5
         
     }
     
