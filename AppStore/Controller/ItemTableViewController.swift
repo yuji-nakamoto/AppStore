@@ -24,7 +24,7 @@ class ItemTableViewController: UIViewController {
         super.viewDidLoad()
         
         sellLabel.text = "\(category!.name) カテゴリーに出品する"
-        sellButton.layer.cornerRadius = 10
+        sellButton.layer.cornerRadius = 5
         tableView.tableFooterView = UIView()
         self.title = category?.name
         collectionDelegete()

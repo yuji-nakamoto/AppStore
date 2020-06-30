@@ -7,12 +7,12 @@
 //
 
 import UIKit
+import EmptyDataSet_Swift
 
 class SearchTableViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchTextField: UITextField!
-    @IBOutlet weak var searchButton: UIBarButtonItem!
     
     var searcnResults: [Item] = []
     
@@ -20,20 +20,11 @@ class SearchTableViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         searchTextField.delegate = self
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
         tableView.tableFooterView = UIView()
         searchTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
-    
-    @IBAction func searchButtonPressed(_ sender: Any) {
-        
-        if searchTextField.text != "" {
-            
-            searchInFirebase(forName: searchTextField.text!)
-            searchTextField.text = ""
-            self.view.endEditing(true)
-        }
-    }
-    
     
     //MARK: Search Function
     
@@ -50,7 +41,17 @@ class SearchTableViewController: UIViewController, UITextFieldDelegate {
     
     @objc func textFieldDidChange(_ textFiled: UITextField) {
         
-        searchInFirebase(forName: searchTextField.text!)
+        if searchTextField.text == "" {
+            searcnResults.removeAll()
+            tableView.reloadData()
+        } else {
+            searchInFirebase(forName: searchTextField.text!)
+        }
+    }
+    
+    //MARK: IBAction
+    @IBAction func dismissKeyboard(_ sender: Any) {
+        searchTextField.endEditing(true)
     }
     
     //MARK: Navigation
@@ -97,4 +98,19 @@ extension SearchTableViewController: UITableViewDelegate, UITableViewDataSource 
         showItemView(searcnResults[indexPath.row])
     }
     
+}
+
+extension SearchTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
+
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.label]
+        return NSAttributedString(string: "商品は見つかりませんでした。", attributes: attributes)
+    }
+
+    
+    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        
+        return NSAttributedString(string: "検索バーより、お求めの商品を検索して下さい。")
+    }
 }
