@@ -11,7 +11,7 @@ import FirebaseAuth
 
 class User {
     
-    var userId: String
+    var objectId: String
     var email: String
     var firstName: String
     var lastName: String
@@ -24,8 +24,8 @@ class User {
     var purchasedItemId: [String]
     var fullName: String
     
-    init(userId: String, email: String, firstName: String, lastName: String) {
-        self.userId = userId
+    init(objectId: String, email: String, firstName: String, lastName: String) {
+        self.objectId = objectId
         self.email = email
         self.firstName = firstName
         self.lastName = lastName
@@ -40,7 +40,7 @@ class User {
     }
     
     init(dict: NSDictionary) {
-        userId = dict[USERID] as? String ?? ""
+        objectId = dict[OBJECTID] as? String ?? ""
         email = dict[EMAIL] as? String ?? ""
         firstName = dict[FIRSTNAME] as? String ?? ""
         lastName = dict[LASTNAME] as? String ?? ""
@@ -78,7 +78,7 @@ class User {
         Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
             
             if error == nil {
-                downloadUserFromFirestore(userId: authResult!.user.uid, email: email)
+                downloadUserFromFirestore(objectId: authResult!.user.uid, email: email)
                 completion(error)
             } else {
                 print("error login user: \(error!.localizedDescription)")
@@ -128,14 +128,14 @@ class User {
 
 func userDictionaryFrom(_ user: User) -> NSDictionary {
     
-    return NSDictionary(objects: [user.userId, user.email, user.firstName, user.lastName, user.fullName, user.profileImageUrl, user.headerImageUrl, user.prefectures, user.city, user.apartment, user.fullAddress, user.purchasedItemId], forKeys: [USERID as NSCopying, EMAIL as NSCopying, FIRSTNAME as NSCopying, LASTNAME as NSCopying, FULLNAME as NSCopying, PROFILEIMAGEURL as NSCopying, HEADERIMAGEURL as NSCopying, PREFECTURES as NSCopying, CITY  as NSCopying, APARTMENT as NSCopying, FULLADDRESS as NSCopying, PURCHAESDITEMID as NSCopying])
+    return NSDictionary(objects: [user.objectId, user.email, user.firstName, user.lastName, user.fullName, user.profileImageUrl, user.headerImageUrl, user.prefectures, user.city, user.apartment, user.fullAddress, user.purchasedItemId], forKeys: [OBJECTID as NSCopying, EMAIL as NSCopying, FIRSTNAME as NSCopying, LASTNAME as NSCopying, FULLNAME as NSCopying, PROFILEIMAGEURL as NSCopying, HEADERIMAGEURL as NSCopying, PREFECTURES as NSCopying, CITY  as NSCopying, APARTMENT as NSCopying, FULLADDRESS as NSCopying, PURCHAESDITEMID as NSCopying])
 }
 
 //MARK: Download User
 
-func downloadUserFromFirestore(userId: String, email: String) {
+func downloadUserFromFirestore(objectId: String, email: String) {
     
-    firebaseRef(.User).document(userId).getDocument { (snapshot, error) in
+    firebaseRef(.User).document(objectId).getDocument { (snapshot, error) in
         
         guard let snapshot = snapshot else {
             return
@@ -144,17 +144,37 @@ func downloadUserFromFirestore(userId: String, email: String) {
             
             saveUserLocally(userDict: snapshot.data()! as NSDictionary)
         } else {
-            let user = User(userId: userId, email: email, firstName: "", lastName: "")
+            let user = User(objectId: objectId, email: email, firstName: "", lastName: "")
             saveUserLocally(userDict: userDictionaryFrom(user))
             saveUserToFirestore(user)
         }
     }
 }
 
+func downloadUsersFromFirebase(_ withObjectId: String, completion: @escaping (_ userArray: [User]) -> Void) {
+    var userArray: [User] = []
+    
+    firebaseRef(.User).whereField(OBJECTID, isEqualTo: withObjectId).getDocuments { (snapshot, error) in
+        
+        guard let snapshot = snapshot else {
+            completion(userArray)
+            return
+        }
+        if !snapshot.isEmpty {
+            
+            for userDict in snapshot.documents {
+                userArray.append(User(dict: userDict.data() as NSDictionary))
+            }
+        }
+        completion(userArray)
+    }
+}
+
+
 //MARK: Save user to firebase
 func saveUserToFirestore(_ user: User) {
     
-    firebaseRef(.User).document(user.userId).setData(userDictionaryFrom(user) as! [String: Any]) { (error) in
+    firebaseRef(.User).document(user.objectId).setData(userDictionaryFrom(user) as! [String: Any]) { (error) in
         
         if error != nil {
             print("error saving user: \(error!.localizedDescription)")

@@ -62,6 +62,7 @@ class PurchaseConfirmationTableViewController: UITableViewController {
             addressLabel.text = "購入するには住所を登録して下さい"
             topLabel.isHidden = true
             confirmButton.isEnabled = false
+            confirmButton.alpha = 0.5
         }
         
         if currentUser?.fullAddress != "" {

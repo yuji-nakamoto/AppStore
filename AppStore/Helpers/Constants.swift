@@ -15,7 +15,7 @@ public let ALGOLIA_SEARCH_KEY = "4a246320dba0ed45f5241a297ba6bc73"
 public let ALGOLOA_ADMIN_KEY = "f778ead3f510f508ec539b046a4109bd"
 
 //User
-public let USERID = "userId"
+public let OBJECTID = "objectId"
 public let EMAIL = "email"
 public let FIRSTNAME = "firstName"
 public let LASTNAME = "lastName"
@@ -28,7 +28,6 @@ public let APARTMENT = "apartment"
 public let FULLADDRESS = "fullAddress"
 public let PURCHAESDITEMID = "purchasedItemId"
 public let CURRENTUSER = "currentUser"
-
 
 //Categoty
 public let NAME = "name"
@@ -45,4 +44,7 @@ public let IMAGEURLS = "imageUrls"
 public let OWNERID = "ownerId"
 public let ITEMIDS = "itemIds"
 
+//Review
+public let REVIEWSTRING = "reviewString"
+public let REVIEWID = "reviewId"
 

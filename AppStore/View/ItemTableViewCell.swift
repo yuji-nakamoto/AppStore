@@ -15,7 +15,6 @@ class ItemTableViewCell: UITableViewCell {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    
     func generateCell(_ item: Item) {
         nameLabel.text = item.name
         priceLabel.text = "¥\(String(item.price))"

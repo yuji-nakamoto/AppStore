@@ -18,7 +18,7 @@ class Cart {
     }
     
     init(dict: NSDictionary) {
-        id = dict[USERID] as? String
+        id = dict[OBJECTID] as? String
         ownerId = dict[OWNERID] as? String
         itemIds = dict[ITEMIDS] as? [String]
     }
@@ -51,7 +51,7 @@ func saveCartToFirestore(_ cart: Cart) {
 //MARK: Helper functions
 
 func cartDictionaryFrom(_ cart: Cart) -> NSDictionary {
-    return NSDictionary(objects: [cart.id ?? "", cart.ownerId ?? "", cart.itemIds ?? ""], forKeys: [USERID as NSCopying, OWNERID as NSCopying, ITEMIDS as NSCopying])
+    return NSDictionary(objects: [cart.id ?? "", cart.ownerId ?? "", cart.itemIds ?? ""], forKeys: [OBJECTID as NSCopying, OWNERID as NSCopying, ITEMIDS as NSCopying])
 }
 
 //MARK: Update basket

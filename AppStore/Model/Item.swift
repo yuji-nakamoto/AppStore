@@ -25,7 +25,7 @@ class Item {
     
     init(dict: NSDictionary) {
         
-        id = dict[USERID] as? String
+        id = dict[OBJECTID] as? String
         categoryId = dict[CATEGORYID] as? String
         name = dict[NAME] as? String
         descriprion = dict[DESCRIPTION] as? String
@@ -44,7 +44,7 @@ func saveItemToFirestore(_ item: Item) {
 //MARK: Helper functions
 
 func itemDictionaryFrom(_ item: Item) -> NSDictionary {
-    return NSDictionary(objects: [item.id ?? "", item.categoryId ?? "", item.name ?? "", item.descriprion ?? "", item.price ?? "", item.imageUrls ?? ""], forKeys: [USERID as NSCopying, CATEGORYID as NSCopying, NAME as NSCopying, DESCRIPTION as NSCopying, PRICE as NSCopying, IMAGEURLS as NSCopying])
+    return NSDictionary(objects: [item.id ?? "", item.categoryId ?? "", item.name ?? "", item.descriprion ?? "", item.price ?? "", item.imageUrls ?? ""], forKeys: [OBJECTID as NSCopying, CATEGORYID as NSCopying, NAME as NSCopying, DESCRIPTION as NSCopying, PRICE as NSCopying, IMAGEURLS as NSCopying])
 }
 
 //MARK: Download Func

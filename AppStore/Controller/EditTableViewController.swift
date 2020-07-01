@@ -19,8 +19,6 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var topLabel: UILabel!
     
-    let profileVC = ProfileTableViewController()
-    let purConVC = PurchaseConfirmationTableViewController()
     var hud = JGProgressHUD(style: .dark)
 
     override func viewDidLoad() {
@@ -57,7 +55,7 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
                     self.hud.textLabel.text = "住所を登録しました"
                     self.hudSuccess()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                        self.navigationController?.popViewController(animated: true)
+                        self.dismiss(animated: true, completion: nil)
                     }
                 } else {
                     print("error updating user", error!.localizedDescription)
@@ -125,14 +123,6 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         hud.indicatorView = JGProgressHUDSuccessIndicatorView()
         hud.show(in: self.view)
         hud.dismiss(afterDelay: 2.0)
-    }
-    
-    private func reloadView() {
-        
-        self.profileVC.loadView()
-        self.profileVC.viewDidLoad()
-        self.purConVC.loadView()
-        self.purConVC.viewDidLoad()
     }
     
 }

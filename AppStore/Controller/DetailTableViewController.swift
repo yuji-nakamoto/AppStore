@@ -11,14 +11,20 @@ import JGProgressHUD
 
 class DetailTableViewController: UIViewController {
     
+    @IBOutlet weak var reviewButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var cartButton: UIButton!
+    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var backView: UIView!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var animationView: UIView!
     
     var item: Item!
     var itemArray: [Item] = []
+    var reviewArray: [Review] = []
     var itemImages: [UIImage] = []
     let hud = JGProgressHUD(style: .dark)
+    var pleaceholderLbl = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,29 +33,43 @@ class DetailTableViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         tableView.tableFooterView = UIView()
-        cartButton.layer.cornerRadius = 5
-        
+        setupKeyboard()
+        setupTextView()
+        setupUI()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         downloadPicture()
+        loadReviewFromFirestore()
+    }
+    
+    //MARK: Setup UI
+    
+    private func setupUI() {
+        
+        reviewButton.layer.cornerRadius = 5
+        backView.layer.borderWidth = 1
+        backView.layer.borderColor = UIColor.systemGray4.cgColor
     }
     
     //MARK: IBAction
     
-    @IBAction func cartButtonPressed(_ sender: Any) {
+    @IBAction func reviewButtonPressed(_ sender: Any) {
         
-        downloadCartFromFirestore(User.currentUserId()) { (cart) in
+        if textViewHaveText() == true {
             
-            if cart == nil {
-                self.createNewCart()
-            } else {
-                cart!.itemIds.append(self.item.id)
-                self.updateCart(cart: cart!, withValues: [ITEMIDS : cart!.itemIds!])
-            }
+            saveToFirebaseReview()
+            return
         }
+        hud.textLabel.text = "文字を入力して下さい"
+        hudError()
+    }
+    
+    @IBAction func writeReviewButtonPressed(_ sender: Any) {
+        
+        self.animationView.isHidden = !self.animationView.isHidden
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
@@ -57,8 +77,18 @@ class DetailTableViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+    //MARK: Load Review
+    
+    private func loadReviewFromFirestore() {
+        
+        downloadReviewFromFirebase(item.id) { (allReview) in
+            self.reviewArray = allReview
+            self.tableView.reloadData()
+        }
+    }
     
     //MARK: Load Picture
+    
     private func downloadPicture() {
         
         if item != nil && item.imageUrls != nil {
@@ -71,35 +101,26 @@ class DetailTableViewController: UIViewController {
         }
     }
     
-    //MARK: Add to basket
+    //MARK: Save Review
     
-    private func createNewCart() {
+    private func saveToFirebaseReview() {
         
-        let newCart = Cart()
+        let currentUser = User.currentUser()
+        let review = Review()
+        review.reviewId = UUID().uuidString
+        review.reviewString = textView.text
+        review.id = currentUser?.objectId
+        review.itemId = item.id
+        review.fullname = currentUser?.fullName
+        review.profileImageUrl = currentUser?.profileImageUrl
+        saveReviewToFirestore(review)
         
-        newCart.ownerId = User.currentUserId()
-        newCart.id = UUID().uuidString
-        newCart.itemIds = [self.item.id]
-        saveCartToFirestore(newCart)
-        
-        hud.textLabel.text = "カートに追加しました"
+        hud.textLabel.text = "レビューを投稿しました"
         hudSuccess()
-    }
-    
-    private func updateCart(cart: Cart, withValues: [String: Any]) {
-        
-        updateCartInFirestore(cart, withValue: withValues) { (error) in
-            
-            if error != nil {
-                
-                self.hud.textLabel.text = "Error: \(error!.localizedDescription)"
-                self.hudError()
-                print("error updating basket", error!.localizedDescription)
-            } else {
-                self.hud.textLabel.text = "カートに追加しました"
-                self.hudSuccess()
-            }
-        }
+        textView.resignFirstResponder()
+        textView.text = ""
+        self.animationView.isHidden = !self.animationView.isHidden
+        loadReviewFromFirestore()
     }
     
     //MARK: Helper Function
@@ -116,6 +137,53 @@ class DetailTableViewController: UIViewController {
         hud.indicatorView = JGProgressHUDSuccessIndicatorView()
         hud.show(in: self.view)
         hud.dismiss(afterDelay: 2.0)
+    }
+    
+    private func textViewHaveText() -> Bool {
+        return textView.text != ""
+    }
+    
+    private func setupTextView() {
+        
+        textView.delegate = self
+        pleaceholderLbl.isHidden = false
+        
+        let pleaceholderX: CGFloat = self.view.frame.size.width / 75
+        let pleaceholderY: CGFloat = -50
+        let pleaceholderWidth: CGFloat = textView.bounds.width - pleaceholderX
+        let pleaceholderHeight: CGFloat = textView.bounds.height
+        let pleaceholderFontSize = self.view.frame.size.width / 25
+        
+        pleaceholderLbl.frame = CGRect(x: pleaceholderX, y: pleaceholderY, width: pleaceholderWidth, height: pleaceholderHeight)
+        pleaceholderLbl.text = "気に入ったことや、気に入らなかったこと"
+        pleaceholderLbl.font = UIFont(name: "HelveticaNeue", size: pleaceholderFontSize)
+        pleaceholderLbl.textColor = .systemGray4
+        pleaceholderLbl.textAlignment = .left
+        
+        textView.addSubview(pleaceholderLbl)
+    }
+    
+    func setupKeyboard() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+    
+    @objc func adjustForKeyboard(notification: Notification) {
+        let userInfo = notification.userInfo!
+        let keyboardScreenEndFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, to: view.window)
+        
+        if notification.name == UIResponder.keyboardWillHideNotification {
+            bottomConstraint.constant = 0
+        } else {
+            if #available(iOS 11.0, *) {
+                bottomConstraint.constant = view.safeAreaInsets.bottom - keyboardViewEndFrame.height
+            } else {
+                bottomConstraint.constant = keyboardViewEndFrame.height
+            }
+            view.layoutIfNeeded()
+        }
     }
     
 }
@@ -151,18 +219,50 @@ extension DetailTableViewController:  UICollectionViewDataSource, UICollectionVi
 extension DetailTableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 1 + 1 + reviewArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! DetailTableViewCell
+        let indexNumber = indexPath.row
         
-        cell.nameLabel.text = item.name
-        cell.priceLabel.text = "¥\(String(item.price))"
-        cell.descriptionLabel.text = item.descriprion
+        if indexNumber == 0 {
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! DetailTableViewCell
+            
+            cell.generateCell(item)
+            cell.item = self.item
+            cell.detailVC = self
+            
+            return cell
+            
+        } else if indexNumber == 1 {
+            
+            let cell2 = tableView.dequeueReusableCell(withIdentifier: "Cell2") as! ReviewCountTableViewCell
+            
+            cell2.reviewCountLabel.text = String(reviewArray.count)
+            return cell2
+            
+        }
+        let cell3 = tableView.dequeueReusableCell(withIdentifier: "Cell3", for: indexPath) as! ReviewTableViewCell
         
-        return cell
+        cell3.generaterCell(reviewArray[indexPath.row - 2])
+        
+        return cell3
     }
+}
+
+extension DetailTableViewController: UITextViewDelegate {
     
+    func textViewDidChange(_ textView: UITextView) {
+        
+        let spacing = CharacterSet.whitespacesAndNewlines
+        
+        if !textView.text.trimmingCharacters(in: spacing).isEmpty {
+            
+            pleaceholderLbl.isHidden = true
+        } else {
+            pleaceholderLbl.isHidden = false
+        }
+    }
 }

@@ -52,6 +52,8 @@ class PurchasedTableViewController: UIViewController {
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
     
+    
+    
 }
 
 extension PurchasedTableViewController: UITableViewDataSource, UITableViewDelegate {
