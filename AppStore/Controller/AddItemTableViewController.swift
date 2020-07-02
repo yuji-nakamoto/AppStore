@@ -142,7 +142,7 @@ class AddItemTableViewController: UITableViewController,UITextFieldDelegate {
         pleaceholderLbl.frame = CGRect(x: pleaceholderX, y: pleaceholderY, width: pleaceholderWidth, height: pleaceholderHeight)
         pleaceholderLbl.text = "商品の特徴や機能、仕様、魅力など"
         pleaceholderLbl.font = UIFont(name: "HelveticaNeue", size: pleaceholderFontSize)
-        pleaceholderLbl.textColor = .systemGray3
+        pleaceholderLbl.textColor = .systemGray4
         pleaceholderLbl.textAlignment = .left
         
         textView.addSubview(pleaceholderLbl)

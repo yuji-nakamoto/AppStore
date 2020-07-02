@@ -25,7 +25,7 @@ class Category {
     }
     
     init(dict: NSDictionary) {
-        id = dict[USERID] as! String
+        id = dict[OBJECTID] as! String
         name = dict[NAME] as? String ?? ""
         image = UIImage(named: dict[IMAGENAME] as? String ?? "")
     }
@@ -67,7 +67,7 @@ func saveCategoryToFirebase(category: Category) {
 
 func categoryDictionaryFrom(_ category: Category) -> NSDictionary {
     
-    return NSDictionary(objects: [category.id, category.name, category.imageName as Any], forKeys: [USERID as NSCopying, NAME as NSCopying, IMAGENAME as NSCopying])
+    return NSDictionary(objects: [category.id, category.name, category.imageName as Any], forKeys: [OBJECTID as NSCopying, NAME as NSCopying, IMAGENAME as NSCopying])
 }
 
 //user only one time

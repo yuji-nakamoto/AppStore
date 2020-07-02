@@ -13,16 +13,14 @@ class ItemTableViewCell: UITableViewCell {
     @IBOutlet weak var tableImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    
+    @IBOutlet weak var reviewCountLabel: UILabel!
     
     func generateCell(_ item: Item) {
         nameLabel.text = item.name
         priceLabel.text = "¥\(String(item.price))"
-        descriptionLabel.text = item.descriprion
+        reviewCountLabel.text = String(item.reviewCount)
         
         if item.imageUrls != nil && item.imageUrls.count > 0 {
-
             downloadImages(imageUrls: [item.imageUrls.first!]) { (images) in
                 self.tableImageView.image = images.first as? UIImage
             }

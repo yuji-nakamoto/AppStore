@@ -51,6 +51,7 @@ class SearchTableViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: IBAction
     @IBAction func dismissKeyboard(_ sender: Any) {
+        searchTextField.text = ""
         searchTextField.endEditing(true)
     }
     

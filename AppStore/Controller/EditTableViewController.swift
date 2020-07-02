@@ -19,10 +19,9 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var topLabel: UILabel!
     
-    let profileVC = ProfileTableViewController()
-    let purConVC = PurchaseConfirmationTableViewController()
     var hud = JGProgressHUD(style: .dark)
-
+    let currentUser = User.currentUser()!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,13 +50,13 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
             
             let withValues = [FIRSTNAME: firstNameTextFiled.text!, LASTNAME: lastNameTextField.text!, FULLNAME: (firstNameTextFiled.text! + " " + lastNameTextField.text!), PREFECTURES: prefecturesTextField.text!, CITY: cityTextField.text!, APARTMENT: apartmentTextField.text!, FULLADDRESS: (prefecturesTextField.text! + cityTextField.text! + apartmentTextField.text!)]
             
-            updateCurrentUserFierstore(withValues: withValues) { (error) in
+            updateCurrentUserFirestore(withValues: withValues) { (error) in
                 
                 if error == nil {
                     self.hud.textLabel.text = "住所を登録しました"
                     self.hudSuccess()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                        self.navigationController?.popViewController(animated: true)
+                        self.dismiss(animated: true, completion: nil)
                     }
                 } else {
                     print("error updating user", error!.localizedDescription)
@@ -73,15 +72,18 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     
     private func loadUserInfo() {
         
-        if User.currentUser() != nil {
-            
-            let currentUser = User.currentUser()!
-            firstNameTextFiled.text = currentUser.firstName
-            lastNameTextField.text = currentUser.lastName
-            prefecturesTextField.text = currentUser.prefectures
-            cityTextField.text = currentUser.city
-            apartmentTextField.text = currentUser.apartment
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+            if self.firstNameTextFiled.text == "AppStore" && self.lastNameTextField.text == "ユーザー" {
+                self.firstNameTextFiled.text = ""
+                self.lastNameTextField.text = ""
+                return
+            }
         }
+        firstNameTextFiled.text = currentUser.firstName
+        lastNameTextField.text = currentUser.lastName
+        prefecturesTextField.text = currentUser.prefectures
+        cityTextField.text = currentUser.city
+        apartmentTextField.text = currentUser.apartment
     }
     
     //MARK: Helper Function
@@ -125,14 +127,6 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         hud.indicatorView = JGProgressHUDSuccessIndicatorView()
         hud.show(in: self.view)
         hud.dismiss(afterDelay: 2.0)
-    }
-    
-    private func reloadView() {
-        
-        self.profileVC.loadView()
-        self.profileVC.viewDidLoad()
-        self.purConVC.loadView()
-        self.purConVC.viewDidLoad()
     }
     
 }

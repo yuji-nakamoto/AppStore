@@ -89,4 +89,3 @@ extension PurchasedTableViewController: EmptyDataSetSource, EmptyDataSetDelegate
         return NSAttributedString(string: "商品カテゴリー、または検索から買い物が行えます。")
     }
 }
-

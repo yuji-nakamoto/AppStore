@@ -22,6 +22,9 @@
 		83489CAF24AA74EA002A8EA3 /* PurchasedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83489CAE24AA74EA002A8EA3 /* PurchasedTableViewController.swift */; };
 		83489CB124AA758D002A8EA3 /* PurchasedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83489CB024AA758D002A8EA3 /* PurchasedTableViewCell.swift */; };
 		83489CB324AA7ECB002A8EA3 /* PurchaseConfirmationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83489CB224AA7ECB002A8EA3 /* PurchaseConfirmationTableViewController.swift */; };
+		83489CB724AAEA34002A8EA3 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83489CB624AAEA33002A8EA3 /* Review.swift */; };
+		83489CBB24ACE07D002A8EA3 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83489CBA24ACE07D002A8EA3 /* ReviewTableViewCell.swift */; };
+		83489CBD24ACE08E002A8EA3 /* ReviewCountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83489CBC24ACE08E002A8EA3 /* ReviewCountTableViewCell.swift */; };
 		835209EF24A4A45700648779 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835209EE24A4A45700648779 /* AppDelegate.swift */; };
 		835209F124A4A45700648779 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835209F024A4A45700648779 /* SceneDelegate.swift */; };
 		835209F624A4A45700648779 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 835209F424A4A45700648779 /* Main.storyboard */; };
@@ -65,6 +68,9 @@
 		83489CAE24AA74EA002A8EA3 /* PurchasedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasedTableViewController.swift; sourceTree = "<group>"; };
 		83489CB024AA758D002A8EA3 /* PurchasedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasedTableViewCell.swift; sourceTree = "<group>"; };
 		83489CB224AA7ECB002A8EA3 /* PurchaseConfirmationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseConfirmationTableViewController.swift; sourceTree = "<group>"; };
+		83489CB624AAEA33002A8EA3 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
+		83489CBA24ACE07D002A8EA3 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
+		83489CBC24ACE08E002A8EA3 /* ReviewCountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCountTableViewCell.swift; sourceTree = "<group>"; };
 		835209EB24A4A45700648779 /* AppStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		835209EE24A4A45700648779 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		835209F024A4A45700648779 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -186,6 +192,7 @@
 				83520A2424A63F0100648779 /* Item.swift */,
 				83520A1924A5183800648779 /* Category.swift */,
 				83478B7424A812D600C6311C /* AlgoliaService.swift */,
+				83489CB624AAEA33002A8EA3 /* Review.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -212,6 +219,8 @@
 				83478B6E24A7DAD100C6311C /* CartTableViewCell.swift */,
 				83478B7024A7DB2F00C6311C /* TotalPriceTableViewCell.swift */,
 				83489CB024AA758D002A8EA3 /* PurchasedTableViewCell.swift */,
+				83489CBA24ACE07D002A8EA3 /* ReviewTableViewCell.swift */,
+				83489CBC24ACE08E002A8EA3 /* ReviewCountTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -362,7 +371,10 @@
 				83520A0524A4B79B00648779 /* LoginViewController.swift in Sources */,
 				83520A1624A4FFF900648779 /* StartViewController.swift in Sources */,
 				8347F26924A6EDE7006B7D8A /* DetailTableViewCell.swift in Sources */,
+				83489CBB24ACE07D002A8EA3 /* ReviewTableViewCell.swift in Sources */,
 				83520A1424A4FAD600648779 /* HomeViewCollectionController.swift in Sources */,
+				83489CB724AAEA34002A8EA3 /* Review.swift in Sources */,
+				83489CBD24ACE08E002A8EA3 /* ReviewCountTableViewCell.swift in Sources */,
 				83478B7B24A8512800C6311C /* EditTableViewController.swift in Sources */,
 				8347F26B24A6EDF7006B7D8A /* DetailCollectionViewCell.swift in Sources */,
 				83478B6B24A7BE0E00C6311C /* Cart.swift in Sources */,

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EmptyDataSet_Swift
 
 class ItemTableViewController: UIViewController {
     
@@ -26,6 +27,8 @@ class ItemTableViewController: UIViewController {
         sellLabel.text = "\(category!.name) カテゴリーに出品する"
         sellButton.layer.cornerRadius = 5
         tableView.tableFooterView = UIView()
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
         self.title = category?.name
         collectionDelegete()
         loadCategory()
@@ -152,4 +155,19 @@ extension ItemTableViewController: UITableViewDelegate, UITableViewDataSource {
         performSegue(withIdentifier: "detailVC", sender: itemArray[indexPath.row])
     }
     
+}
+
+extension ItemTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
+
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.label]
+        return NSAttributedString(string: "こちらのカテゴリーには商品がありません。", attributes: attributes)
+    }
+
+    
+    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        
+        return NSAttributedString(string: "商品が出品されるまで暫くお待ち下さいませ。")
+    }
 }

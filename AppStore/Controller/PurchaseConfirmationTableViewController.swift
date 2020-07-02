@@ -62,6 +62,7 @@ class PurchaseConfirmationTableViewController: UITableViewController {
             addressLabel.text = "購入するには住所を登録して下さい"
             topLabel.isHidden = true
             confirmButton.isEnabled = false
+            confirmButton.alpha = 0.5
         }
         
         if currentUser?.fullAddress != "" {
@@ -126,7 +127,7 @@ class PurchaseConfirmationTableViewController: UITableViewController {
         if User.currentUser() != nil {
             
             let newItemIds = User.currentUser()!.purchasedItemId + itemIds
-            updateCurrentUserFierstore(withValues: [PURCHAESDITEMID : newItemIds]) { (error) in
+            updateCurrentUserFirestore(withValues: [PURCHAESDITEMID : newItemIds]) { (error) in
                 
                 if error != nil {
                     print("Error adding purchased items", error!.localizedDescription)
