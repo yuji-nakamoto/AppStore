@@ -14,26 +14,27 @@ class ReviewTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var reviewLabel: UILabel!
     
-    func generaterCell(_ review: Review) {
+    let currentUser = User.currentUser()
+    
+    func generateCell(_ review: Review) {
         
         profileImageView.layer.cornerRadius = 45/2
         reviewLabel.text = review.reviewString
         nameLabel.text = review.fullname
         
-        downloadImages(imageUrls: [review.profileImageUrl]) { (images) in
-            self.profileImageView.image = images.first as? UIImage
-        }
+        profileImageView.sd_setImage(with: URL(string: review.profileImageUrl), placeholderImage: UIImage(named: "placeholder-person"))
+
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
-
+    
 }

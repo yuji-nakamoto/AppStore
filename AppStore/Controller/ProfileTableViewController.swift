@@ -44,6 +44,7 @@ class ProfileTableViewController: UITableViewController {
     //MARK: Setup UI
     
     private func setupUI() {
+        
         profileImageButton.layer.cornerRadius = 5
         profileImageView.layer.cornerRadius = 35
         profileImageView.layer.borderWidth = 3
@@ -66,7 +67,7 @@ class ProfileTableViewController: UITableViewController {
         
         if User.currentUser() != nil {
             
-            if currentUser.firstName == "" && currentUser.lastName == "" {
+            if currentUser.firstName == "AppStore" && currentUser.lastName == "ユーザー" {
                 
                 userNameLabel.text = ""
                 descriptionLabel.text = "買い物を続けるには\nアドレス帳の管理を行って下さい。"
@@ -138,7 +139,7 @@ class ProfileTableViewController: UITableViewController {
                 
                 let withValues = [PROFILEIMAGEURL: profileUrl]
                 
-                updateCurrentUserFierstore(withValues: withValues) { (error) in
+                updateCurrentUserFirestore(withValues: withValues) { (error) in
                     
                     if error == nil {
                        self.hideLoadingIndicator()
@@ -157,7 +158,7 @@ class ProfileTableViewController: UITableViewController {
                     
                     let withValues = [HEADERIMAGEURL: headerUrl]
                     
-                    updateCurrentUserFierstore(withValues: withValues) { (error) in
+                    updateCurrentUserFirestore(withValues: withValues) { (error) in
                         
                         if error == nil {
                             

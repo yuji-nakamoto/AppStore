@@ -70,3 +70,39 @@ func downloadReviewFromFirebase(_ withItemId: String, completion: @escaping (_ r
         completion(reviewArray)
     }
 }
+
+func downloadReview(_ withIds: [String], completion: @escaping (_ reviewArray: [Review]) -> Void) {
+    
+    var count = 0
+    var reviewArray: [Review] = []
+    
+    if withIds.count > 0 {
+        
+        for reviewId in withIds {
+            
+            firebaseRef(.Review).document(reviewId).getDocument { (snapshot, error) in
+                
+                guard let snapshot = snapshot else {
+                    completion(reviewArray)
+                    return
+                }
+                if snapshot.exists {
+                    
+                    reviewArray.append(Review(dict: snapshot.data()! as NSDictionary))
+                    count += 1
+                    print(snapshot.data()!)
+                } else {
+                    print("error: no data ")
+                    completion(reviewArray)
+                }
+                if count == withIds.count {
+                    
+                    completion(reviewArray)
+                }
+            }
+        }
+    } else {
+        print("0count")
+        completion(reviewArray)
+    }
+}

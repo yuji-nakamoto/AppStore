@@ -20,7 +20,8 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var topLabel: UILabel!
     
     var hud = JGProgressHUD(style: .dark)
-
+    let currentUser = User.currentUser()!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,7 +50,7 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
             
             let withValues = [FIRSTNAME: firstNameTextFiled.text!, LASTNAME: lastNameTextField.text!, FULLNAME: (firstNameTextFiled.text! + " " + lastNameTextField.text!), PREFECTURES: prefecturesTextField.text!, CITY: cityTextField.text!, APARTMENT: apartmentTextField.text!, FULLADDRESS: (prefecturesTextField.text! + cityTextField.text! + apartmentTextField.text!)]
             
-            updateCurrentUserFierstore(withValues: withValues) { (error) in
+            updateCurrentUserFirestore(withValues: withValues) { (error) in
                 
                 if error == nil {
                     self.hud.textLabel.text = "住所を登録しました"
@@ -71,15 +72,18 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     
     private func loadUserInfo() {
         
-        if User.currentUser() != nil {
-            
-            let currentUser = User.currentUser()!
-            firstNameTextFiled.text = currentUser.firstName
-            lastNameTextField.text = currentUser.lastName
-            prefecturesTextField.text = currentUser.prefectures
-            cityTextField.text = currentUser.city
-            apartmentTextField.text = currentUser.apartment
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+            if self.firstNameTextFiled.text == "AppStore" && self.lastNameTextField.text == "ユーザー" {
+                self.firstNameTextFiled.text = ""
+                self.lastNameTextField.text = ""
+                return
+            }
         }
+        firstNameTextFiled.text = currentUser.firstName
+        lastNameTextField.text = currentUser.lastName
+        prefecturesTextField.text = currentUser.prefectures
+        cityTextField.text = currentUser.city
+        apartmentTextField.text = currentUser.apartment
     }
     
     //MARK: Helper Function

@@ -21,10 +21,13 @@ class DetailTableViewController: UIViewController {
     
     var item: Item!
     var itemArray: [Item] = []
+    var review: Review!
     var reviewArray: [Review] = []
     var itemImages: [UIImage] = []
     let hud = JGProgressHUD(style: .dark)
     var pleaceholderLbl = UILabel()
+    var reviewIds: [String] = []
+    let currentUser = User.currentUser()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,8 +107,7 @@ class DetailTableViewController: UIViewController {
     //MARK: Save Review
     
     private func saveToFirebaseReview() {
-        
-        let currentUser = User.currentUser()
+                
         let review = Review()
         review.reviewId = UUID().uuidString
         review.reviewString = textView.text
@@ -114,6 +116,9 @@ class DetailTableViewController: UIViewController {
         review.fullname = currentUser?.fullName
         review.profileImageUrl = currentUser?.profileImageUrl
         saveReviewToFirestore(review)
+
+        item.reviewCount = reviewArray.count + 1
+        updateItemFirestore(item)
         
         hud.textLabel.text = "レビューを投稿しました"
         hudSuccess()
@@ -121,9 +126,17 @@ class DetailTableViewController: UIViewController {
         textView.text = ""
         self.animationView.isHidden = !self.animationView.isHidden
         loadReviewFromFirestore()
+        scrollToBottom()
     }
     
     //MARK: Helper Function
+    
+    func scrollToBottom() {
+        if reviewArray.count > 0 {
+            let index = IndexPath(row: reviewArray.count, section: 0)
+            tableView.scrollToRow(at: index, at: UITableView.ScrollPosition.bottom, animated: true)
+        }
+    }
     
     private func hudError() {
         
@@ -246,8 +259,7 @@ extension DetailTableViewController: UITableViewDelegate, UITableViewDataSource 
         }
         let cell3 = tableView.dequeueReusableCell(withIdentifier: "Cell3", for: indexPath) as! ReviewTableViewCell
         
-        cell3.generaterCell(reviewArray[indexPath.row - 2])
-        
+        cell3.generateCell(reviewArray[indexPath.row - 2])
         return cell3
     }
 }

@@ -18,6 +18,7 @@ class Item {
     var descriprion: String!
     var price: Int!
     var imageUrls: [String]!
+    var reviewCount: Int!
     
     init() {
         
@@ -31,6 +32,7 @@ class Item {
         descriprion = dict[DESCRIPTION] as? String
         price = dict[PRICE] as? Int
         imageUrls = dict[IMAGEURLS] as? [String]
+        reviewCount = dict[REVIEWCOUNT] as? Int
     }
 }
 
@@ -41,10 +43,15 @@ func saveItemToFirestore(_ item: Item) {
     firebaseRef(.Items).document(item.id).setData(itemDictionaryFrom(item) as! [String: Any])
 }
 
+func updateItemFirestore(_ item: Item) {
+    
+    firebaseRef(.Items).document(item.id).updateData(itemDictionaryFrom(item) as! [String: Any])
+}
+
 //MARK: Helper functions
 
 func itemDictionaryFrom(_ item: Item) -> NSDictionary {
-    return NSDictionary(objects: [item.id ?? "", item.categoryId ?? "", item.name ?? "", item.descriprion ?? "", item.price ?? "", item.imageUrls ?? ""], forKeys: [OBJECTID as NSCopying, CATEGORYID as NSCopying, NAME as NSCopying, DESCRIPTION as NSCopying, PRICE as NSCopying, IMAGEURLS as NSCopying])
+    return NSDictionary(objects: [item.id ?? "", item.categoryId ?? "", item.name ?? "", item.descriprion ?? "", item.price ?? "", item.imageUrls ?? "", item.reviewCount ?? 0], forKeys: [OBJECTID as NSCopying, CATEGORYID as NSCopying, NAME as NSCopying, DESCRIPTION as NSCopying, PRICE as NSCopying, IMAGEURLS as NSCopying, REVIEWCOUNT as NSCopying])
 }
 
 //MARK: Download Func

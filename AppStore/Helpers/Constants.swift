@@ -28,6 +28,7 @@ public let APARTMENT = "apartment"
 public let FULLADDRESS = "fullAddress"
 public let PURCHAESDITEMID = "purchasedItemId"
 public let CURRENTUSER = "currentUser"
+public let PLACEHOLDRIMAGEURL = "https://firebasestorage.googleapis.com/v0/b/appstore-a772d.appspot.com/o/ProfileImage%2F8Uujy2X4YbTc0J5SfNHGEnIXvpj2%2Fjpg?alt=media&token=fa105550-c4e2-4869-9487-19bc3516a1c1"
 
 //Categoty
 public let NAME = "name"
@@ -39,6 +40,7 @@ public let CATEGORYID = "categoryId"
 public let DESCRIPTION = "description"
 public let PRICE = "price"
 public let IMAGEURLS = "imageUrls"
+public let REVIEWCOUNT = "reviewCount"
 
 //Cart
 public let OWNERID = "ownerId"

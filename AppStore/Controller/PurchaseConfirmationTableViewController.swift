@@ -127,7 +127,7 @@ class PurchaseConfirmationTableViewController: UITableViewController {
         if User.currentUser() != nil {
             
             let newItemIds = User.currentUser()!.purchasedItemId + itemIds
-            updateCurrentUserFierstore(withValues: [PURCHAESDITEMID : newItemIds]) { (error) in
+            updateCurrentUserFirestore(withValues: [PURCHAESDITEMID : newItemIds]) { (error) in
                 
                 if error != nil {
                     print("Error adding purchased items", error!.localizedDescription)

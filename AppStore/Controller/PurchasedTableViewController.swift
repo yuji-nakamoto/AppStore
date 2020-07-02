@@ -52,8 +52,6 @@ class PurchasedTableViewController: UIViewController {
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
     
-    
-    
 }
 
 extension PurchasedTableViewController: UITableViewDataSource, UITableViewDelegate {
@@ -91,4 +89,3 @@ extension PurchasedTableViewController: EmptyDataSetSource, EmptyDataSetDelegate
         return NSAttributedString(string: "商品カテゴリー、または検索から買い物が行えます。")
     }
 }
-
