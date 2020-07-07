@@ -16,6 +16,8 @@ class Review {
     var itemId: String!
     var fullname: String!
     var profileImageUrl: String!
+    var imageUrls: [String]!
+    var name: String!
     
     init() {
         
@@ -29,13 +31,16 @@ class Review {
         itemId = dict[ITEMIDS] as? String ?? ""
         fullname = dict[FULLNAME] as? String ?? ""
         profileImageUrl = dict[PROFILEIMAGEURL] as? String ?? ""
+        imageUrls = dict[IMAGEURLS] as? [String] ?? []
+        name = dict[NAME] as? String ?? ""
     }
 }
 
 //MARK: Helper Function
 
 func reviewDictionaryFrom(_ review: Review) -> NSDictionary {
-    return NSDictionary(objects: [review.id ?? "", review.reviewId ?? "", review.reviewString ?? "", review.itemId ?? "", review.fullname ?? "", review.profileImageUrl ?? ""], forKeys: [OBJECTID as NSCopying, REVIEWID as NSCopying, REVIEWSTRING as NSCopying, ITEMIDS as NSCopying, FULLNAME as NSCopying, PROFILEIMAGEURL as NSCopying])
+    
+    return NSDictionary(objects: [review.id!, review.reviewId!, review.reviewString!, review.itemId!, review.fullname ?? "", review.profileImageUrl ?? "", review.name!, review.imageUrls ?? ""], forKeys: [OBJECTID as NSCopying, REVIEWID as NSCopying, REVIEWSTRING as NSCopying, ITEMIDS as NSCopying, FULLNAME as NSCopying, PROFILEIMAGEURL as NSCopying, NAME as NSCopying, IMAGEURLS as NSCopying])
 }
 
 //MARK: Save Review to Firebase
@@ -64,7 +69,7 @@ func downloadReviewFromFirebase(_ withItemId: String, completion: @escaping (_ r
         if !snapshot.isEmpty {
             
             for reviewDict in snapshot.documents {
-                reviewArray.append(Review(dict: reviewDict.data() as NSDictionary))
+                reviewArray.insert(Review(dict: reviewDict.data() as NSDictionary), at: 0)
             }
         }
         completion(reviewArray)
@@ -73,36 +78,23 @@ func downloadReviewFromFirebase(_ withItemId: String, completion: @escaping (_ r
 
 func downloadReview(_ withIds: [String], completion: @escaping (_ reviewArray: [Review]) -> Void) {
     
-    var count = 0
     var reviewArray: [Review] = []
     
-    if withIds.count > 0 {
+    for reviewId in withIds {
         
-        for reviewId in withIds {
+        firebaseRef(.Review).document(reviewId).getDocument { (snapshot, error) in
             
-            firebaseRef(.Review).document(reviewId).getDocument { (snapshot, error) in
+            guard let snapshot = snapshot else {
+                completion(reviewArray)
+                return
+            }
+            if snapshot.exists {
                 
-                guard let snapshot = snapshot else {
-                    completion(reviewArray)
-                    return
-                }
-                if snapshot.exists {
-                    
-                    reviewArray.append(Review(dict: snapshot.data()! as NSDictionary))
-                    count += 1
-                    print(snapshot.data()!)
-                } else {
-                    print("error: no data ")
-                    completion(reviewArray)
-                }
-                if count == withIds.count {
-                    
-                    completion(reviewArray)
-                }
+                reviewArray.insert(Review(dict: snapshot.data()! as NSDictionary), at: 0)
+                completion(reviewArray)
+            } else {
+                completion(reviewArray)
             }
         }
-    } else {
-        print("0count")
-        completion(reviewArray)
     }
 }

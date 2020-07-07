@@ -66,6 +66,7 @@ class CartTableViewController: UIViewController {
     
     private func setupUI() {
         
+        self.navigationItem.title = "マイカート"
         cashRegisterButton.layer.cornerRadius = 5
         
         if items.count == 0 {

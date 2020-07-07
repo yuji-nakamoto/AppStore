@@ -25,6 +25,7 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "お客様の住所"
         registerButton.layer.cornerRadius = 5
         tableView.tableFooterView = UIView()
         textFieldDelegate()

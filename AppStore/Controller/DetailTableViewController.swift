@@ -27,6 +27,7 @@ class DetailTableViewController: UIViewController {
     let hud = JGProgressHUD(style: .dark)
     var pleaceholderLbl = UILabel()
     var reviewIdArray: [String] = []
+    var itemIdArray: [String] = []
     let currentUser = User.currentUser()
     let generator = UINotificationFeedbackGenerator()
     
@@ -114,6 +115,7 @@ class DetailTableViewController: UIViewController {
     private func saveToFirebaseReview() {
         
         reviewIdArray.removeAll()
+        itemIdArray.removeAll()
         
         let review = Review()
         review.reviewId = UUID().uuidString
@@ -122,10 +124,13 @@ class DetailTableViewController: UIViewController {
         review.itemId = item.id
         review.fullname = currentUser?.fullName
         review.profileImageUrl = currentUser?.profileImageUrl
+        review.imageUrls = item.imageUrls
+        review.name = item.name
         reviewIdArray.append(review.reviewId)
+        itemIdArray.append(review.itemId)
         saveReviewToFirestore(review)
         
-        addReviewIdArray(reviewIdArray)
+        addIdArray(reviewIdArray, itemIdArray)
         
         item.reviewCount = reviewArray.count + 1
         updateItemFirestore(item)
@@ -137,12 +142,13 @@ class DetailTableViewController: UIViewController {
     
     //MARK: Helper Function
     
-    private func addReviewIdArray(_ reviewIds: [String]) {
+    private func addIdArray(_ reviewIds: [String], _ itemIds: [String]) {
         
         if let currentUser = User.currentUser() {
             
             let newReviewIds = currentUser.reviewId + reviewIds
-            updateCurrentUserFirestore(withValues: [REVIEWID : newReviewIds]) { (error) in
+            let newItemIds = currentUser.itemId + itemIds
+            updateCurrentUserFirestore(withValues: [REVIEWID : newReviewIds, ITEMIDS: newItemIds]) { (error) in
                 
                 if error != nil {
                     print("Error adding reviewIds", error!.localizedDescription)

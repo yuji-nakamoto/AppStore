@@ -28,7 +28,8 @@ class ReviewTableViewController: UITableViewController {
         
         downloadReview(User.currentUser()!.reviewId) { (allReview) in
             self.reviewArray = allReview
-            DispatchQueue.main.async {
+            self.title = "レビュー数: \(self.reviewArray.count)"
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 self.tableView.reloadData()
             }
         }

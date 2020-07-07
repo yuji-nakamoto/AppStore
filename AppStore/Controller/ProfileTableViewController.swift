@@ -45,6 +45,7 @@ class ProfileTableViewController: UITableViewController {
     
     private func setupUI() {
         
+        self.navigationItem.title = "マイページ"
         profileImageButton.layer.cornerRadius = 5
         profileImageView.layer.cornerRadius = 35
         profileImageView.layer.borderWidth = 3

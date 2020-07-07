@@ -49,4 +49,3 @@ public let ITEMIDS = "itemIds"
 //Review
 public let REVIEWSTRING = "reviewString"
 public let REVIEWID = "reviewId"
-

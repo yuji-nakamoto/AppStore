@@ -24,6 +24,7 @@ class User {
     var purchasedItemId: [String]
     var fullName: String
     var reviewId: [String]
+    var itemId: [String]
     
     init(objectId: String, email: String, profileImageUrl: String, firstName: String, lastName: String) {
         self.objectId = objectId
@@ -39,6 +40,7 @@ class User {
         self.fullAddress = ""
         self.purchasedItemId = []
         self.reviewId = []
+        self.itemId = []
     }
     
     init(dict: NSDictionary) {
@@ -55,6 +57,7 @@ class User {
         fullAddress = prefectures + city
         purchasedItemId = dict[PURCHAESDITEMID] as? [String] ?? []
         reviewId = dict[REVIEWID] as? [String] ?? []
+        itemId = dict[ITEMIDS] as? [String] ?? []
     }
     
     //MARK: Return User
@@ -130,7 +133,7 @@ class User {
 
 func userDictionaryFrom(_ user: User) -> NSDictionary {
     
-    return NSDictionary(objects: [user.objectId, user.email, user.firstName, user.lastName, user.fullName, user.profileImageUrl, user.headerImageUrl, user.prefectures, user.city, user.apartment, user.fullAddress, user.purchasedItemId, user.reviewId], forKeys: [OBJECTID as NSCopying, EMAIL as NSCopying, FIRSTNAME as NSCopying, LASTNAME as NSCopying, FULLNAME as NSCopying, PROFILEIMAGEURL as NSCopying, HEADERIMAGEURL as NSCopying, PREFECTURES as NSCopying, CITY  as NSCopying, APARTMENT as NSCopying, FULLADDRESS as NSCopying, PURCHAESDITEMID as NSCopying, REVIEWID as NSCopying])
+    return NSDictionary(objects: [user.objectId, user.email, user.firstName, user.lastName, user.fullName, user.profileImageUrl, user.headerImageUrl, user.prefectures, user.city, user.apartment, user.fullAddress, user.purchasedItemId, user.reviewId, user.itemId], forKeys: [OBJECTID as NSCopying, EMAIL as NSCopying, FIRSTNAME as NSCopying, LASTNAME as NSCopying, FULLNAME as NSCopying, PROFILEIMAGEURL as NSCopying, HEADERIMAGEURL as NSCopying, PREFECTURES as NSCopying, CITY  as NSCopying, APARTMENT as NSCopying, FULLADDRESS as NSCopying, PURCHAESDITEMID as NSCopying, REVIEWID as NSCopying, ITEMIDS as NSCopying])
 }
 
 //MARK: Download User

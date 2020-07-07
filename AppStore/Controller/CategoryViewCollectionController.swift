@@ -1,5 +1,5 @@
 //
-//  HomeViewCollectionController.swift
+//  CategoryViewCollectionController.swift
 //  AppStore
 //
 //  Created by yuji_nakamoto on 2020/06/26.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeViewCollectionController: UICollectionViewController {
+class CategoryViewCollectionController: UICollectionViewController {
     
     var categoryArray: [Category] = []
 
@@ -18,6 +18,7 @@ class HomeViewCollectionController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.title = "商品カテゴリー"
 //        createCategorySet()
         loadCategory()
     }
@@ -67,7 +68,7 @@ class HomeViewCollectionController: UICollectionViewController {
     
 }
 
-extension HomeViewCollectionController: UICollectionViewDelegateFlowLayout {
+extension CategoryViewCollectionController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         

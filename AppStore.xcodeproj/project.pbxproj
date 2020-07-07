@@ -40,7 +40,7 @@
 		83520A0E24A4CB7A00648779 /* FirebaseReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83520A0D24A4CB7A00648779 /* FirebaseReference.swift */; };
 		83520A1024A4D11500648779 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83520A0F24A4D11500648779 /* CreateAccountViewController.swift */; };
 		83520A1224A4F52A00648779 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83520A1124A4F52A00648779 /* ResetPasswordViewController.swift */; };
-		83520A1424A4FAD600648779 /* HomeViewCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83520A1324A4FAD600648779 /* HomeViewCollectionController.swift */; };
+		83520A1424A4FAD600648779 /* CategoryViewCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83520A1324A4FAD600648779 /* CategoryViewCollectionController.swift */; };
 		83520A1624A4FFF900648779 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83520A1524A4FFF900648779 /* StartViewController.swift */; };
 		83520A1A24A5183800648779 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83520A1924A5183800648779 /* Category.swift */; };
 		83520A1C24A520D800648779 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83520A1B24A520D800648779 /* HomeCollectionViewCell.swift */; };
@@ -91,7 +91,7 @@
 		83520A0D24A4CB7A00648779 /* FirebaseReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseReference.swift; sourceTree = "<group>"; };
 		83520A0F24A4D11500648779 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		83520A1124A4F52A00648779 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
-		83520A1324A4FAD600648779 /* HomeViewCollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCollectionController.swift; sourceTree = "<group>"; };
+		83520A1324A4FAD600648779 /* CategoryViewCollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewCollectionController.swift; sourceTree = "<group>"; };
 		83520A1524A4FFF900648779 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		83520A1924A5183800648779 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		83520A1B24A520D800648779 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -176,7 +176,7 @@
 				83520A0F24A4D11500648779 /* CreateAccountViewController.swift */,
 				83520A1124A4F52A00648779 /* ResetPasswordViewController.swift */,
 				83478B6C24A7DA8300C6311C /* CartTableViewController.swift */,
-				83520A1324A4FAD600648779 /* HomeViewCollectionController.swift */,
+				83520A1324A4FAD600648779 /* CategoryViewCollectionController.swift */,
 				83478B7824A836CE00C6311C /* AddItemTableViewController.swift */,
 				83478B7224A80B8200C6311C /* SearchTableViewController.swift */,
 				83520A1524A4FFF900648779 /* StartViewController.swift */,
@@ -381,7 +381,7 @@
 				83520A1624A4FFF900648779 /* StartViewController.swift in Sources */,
 				8347F26924A6EDE7006B7D8A /* DetailTableViewCell.swift in Sources */,
 				83489CBB24ACE07D002A8EA3 /* ReviewTableViewCell.swift in Sources */,
-				83520A1424A4FAD600648779 /* HomeViewCollectionController.swift in Sources */,
+				83520A1424A4FAD600648779 /* CategoryViewCollectionController.swift in Sources */,
 				83489CB724AAEA34002A8EA3 /* Review.swift in Sources */,
 				83489CBD24ACE08E002A8EA3 /* ReviewCountTableViewCell.swift in Sources */,
 				83478B7B24A8512800C6311C /* EditTableViewController.swift in Sources */,
