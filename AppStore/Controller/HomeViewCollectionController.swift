@@ -28,7 +28,9 @@ class HomeViewCollectionController: UICollectionViewController {
         
         downloadCategoriesFromFirebase { (allCategories) in
             self.categoryArray = allCategories
-            self.collectionView.reloadData()
+            DispatchQueue.main.async {
+               self.collectionView.reloadData()
+            }
         }
     }
     

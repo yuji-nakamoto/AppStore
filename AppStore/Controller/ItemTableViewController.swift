@@ -20,25 +20,30 @@ class ItemTableViewController: UIViewController {
     var categoryArray: [Category] = []
     var category: Category?
     var itemArray: [Item] = []
+    let refresh = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        sellLabel.text = "\(category!.name) カテゴリーに出品する"
-        sellButton.layer.cornerRadius = 5
-        tableView.tableFooterView = UIView()
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
-        self.title = category?.name
         collectionDelegete()
         loadCategory()
         loadItems()
+        setupUI()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    //MARK: Setup UI
+    
+    private func setupUI() {
         
-        loadItems()
+        tableView.tableFooterView = UIView()
+        sellLabel.text = "\(category!.name) カテゴリーに出品する"
+        sellButton.layer.cornerRadius = 5
+        self.title = category?.name
+        
+        tableView.refreshControl = refresh
+        refresh.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
     }
     
     
@@ -61,7 +66,9 @@ class ItemTableViewController: UIViewController {
         
         downloadCategoriesFromFirebase { (allCategories) in
             self.categoryArray = allCategories
-            self.collectionView.reloadData()
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
         }
     }
     
@@ -71,7 +78,9 @@ class ItemTableViewController: UIViewController {
         
         downloadItemsFromFirebase(category!.id) { (allItems) in
             self.itemArray = allItems
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
     
@@ -95,6 +104,17 @@ class ItemTableViewController: UIViewController {
             let addVC = segue.destination as! AddItemTableViewController
             addVC.category = category!
         }
+    }
+    
+    //MARK: Helper Function
+    
+    @objc func refreshTableView(){
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            self.collectionView.reloadData()
+        }
+        refresh.endRefreshing()
     }
     
 }

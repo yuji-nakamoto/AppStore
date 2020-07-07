@@ -48,12 +48,17 @@ class CartTableViewController: UIViewController {
         if cart != nil {
             downloadItems(cart!.itemIds) { (Items) in
                 self.items = Items
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    self.setupUI()
+                }
+                
+            }
+        } else {
+            DispatchQueue.main.async {
                 self.tableView.reloadData()
                 self.setupUI()
             }
-        } else {
-            self.tableView.reloadData()
-            self.setupUI()
         }
     }
     

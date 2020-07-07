@@ -34,7 +34,9 @@ class PurchasedTableViewController: UIViewController {
         
         downloadItems(User.currentUser()!.purchasedItemId) { (allItems) in
             self.itemArray = allItems
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
     

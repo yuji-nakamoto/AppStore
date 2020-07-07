@@ -21,21 +21,20 @@ class DetailTableViewController: UIViewController {
     
     var item: Item!
     var itemArray: [Item] = []
-    var review: Review!
     var reviewArray: [Review] = []
     var itemImages: [UIImage] = []
+    var reviewIds: [String] = []
     let hud = JGProgressHUD(style: .dark)
     var pleaceholderLbl = UILabel()
-    var reviewIds: [String] = []
+    var reviewIdArray: [String] = []
     let currentUser = User.currentUser()
+    let generator = UINotificationFeedbackGenerator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "商品の詳細"
         collectionView.delegate = self
         collectionView.dataSource = self
-        tableView.tableFooterView = UIView()
         setupKeyboard()
         setupTextView()
         setupUI()
@@ -52,6 +51,8 @@ class DetailTableViewController: UIViewController {
     
     private func setupUI() {
         
+        self.title = "商品の詳細"
+        tableView.tableFooterView = UIView()
         reviewButton.layer.cornerRadius = 5
         backView.layer.borderWidth = 1
         backView.layer.borderColor = UIColor.systemGray4.cgColor
@@ -86,7 +87,9 @@ class DetailTableViewController: UIViewController {
         
         downloadReviewFromFirebase(item.id) { (allReview) in
             self.reviewArray = allReview
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
     
@@ -98,7 +101,9 @@ class DetailTableViewController: UIViewController {
             downloadImages(imageUrls: item.imageUrls) { (allImages) in
                 if allImages.count > 0 {
                     self.itemImages = allImages as! [UIImage]
-                    self.collectionView.reloadData()
+                    DispatchQueue.main.async {
+                        self.collectionView.reloadData()
+                    }
                 }
             }
         }
@@ -107,7 +112,9 @@ class DetailTableViewController: UIViewController {
     //MARK: Save Review
     
     private func saveToFirebaseReview() {
-                
+        
+        reviewIdArray.removeAll()
+        
         let review = Review()
         review.reviewId = UUID().uuidString
         review.reviewString = textView.text
@@ -115,13 +122,37 @@ class DetailTableViewController: UIViewController {
         review.itemId = item.id
         review.fullname = currentUser?.fullName
         review.profileImageUrl = currentUser?.profileImageUrl
+        reviewIdArray.append(review.reviewId)
         saveReviewToFirestore(review)
-
+        
+        addReviewIdArray(reviewIdArray)
+        
         item.reviewCount = reviewArray.count + 1
         updateItemFirestore(item)
         
         hud.textLabel.text = "レビューを投稿しました"
         hudSuccess()
+        dismissView()
+    }
+    
+    //MARK: Helper Function
+    
+    private func addReviewIdArray(_ reviewIds: [String]) {
+        
+        if let currentUser = User.currentUser() {
+            
+            let newReviewIds = currentUser.reviewId + reviewIds
+            updateCurrentUserFirestore(withValues: [REVIEWID : newReviewIds]) { (error) in
+                
+                if error != nil {
+                    print("Error adding reviewIds", error!.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    private func dismissView() {
+        
         textView.resignFirstResponder()
         textView.text = ""
         self.animationView.isHidden = !self.animationView.isHidden
@@ -129,13 +160,10 @@ class DetailTableViewController: UIViewController {
         scrollToBottom()
     }
     
-    //MARK: Helper Function
-    
     func scrollToBottom() {
-        if reviewArray.count > 0 {
-            let index = IndexPath(row: reviewArray.count, section: 0)
-            tableView.scrollToRow(at: index, at: UITableView.ScrollPosition.bottom, animated: true)
-        }
+        
+        let index = IndexPath(row: reviewArray.count, section: 0)
+        tableView.scrollToRow(at: index, at: UITableView.ScrollPosition.bottom, animated: true)
     }
     
     private func hudError() {

@@ -79,11 +79,14 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
                 return
             }
         }
-        firstNameTextFiled.text = currentUser.firstName
-        lastNameTextField.text = currentUser.lastName
-        prefecturesTextField.text = currentUser.prefectures
-        cityTextField.text = currentUser.city
-        apartmentTextField.text = currentUser.apartment
+        DispatchQueue.main.async {
+            self.firstNameTextFiled.text = self.currentUser.firstName
+            self.lastNameTextField.text = self.currentUser.lastName
+            self.prefecturesTextField.text = self.currentUser.prefectures
+            self.cityTextField.text = self.currentUser.city
+            self.apartmentTextField.text = self.currentUser.apartment
+        }
+        
     }
     
     //MARK: Helper Function

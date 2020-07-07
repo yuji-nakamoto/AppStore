@@ -19,6 +19,7 @@ class DetailTableViewCell: UITableViewCell {
     var item: Item!
     var detailVC: DetailTableViewController?
     let hud = JGProgressHUD(style: .dark)
+    let generator = UINotificationFeedbackGenerator()
     
     func generateCell(_ item: Item) {
         
@@ -53,6 +54,7 @@ class DetailTableViewCell: UITableViewCell {
         newCart.itemIds = [self.item.id]
         saveCartToFirestore(newCart)
         
+        detailVC!.generator.notificationOccurred(.error)
         hud.textLabel.text = "カートに追加しました"
         hudSuccess()
     }
@@ -67,6 +69,7 @@ class DetailTableViewCell: UITableViewCell {
                 self.hudError()
                 print("error updating basket", error!.localizedDescription)
             } else {
+                self.detailVC!.generator.notificationOccurred(.error)
                 self.hud.textLabel.text = "カートに追加しました"
                 self.hudSuccess()
             }
