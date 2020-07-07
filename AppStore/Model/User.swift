@@ -172,6 +172,18 @@ func downloadUsersFromFirebase(_ withObjectId: String, completion: @escaping (_ 
     }
 }
 
+func downloadUser(_ withObjectId: String, completion: @escaping (_ user: User) -> Void) {
+    
+    firebaseRef(.User).document(withObjectId).getDocument { (snapshot, error) in
+        
+        if error != nil {
+            print(error!.localizedDescription)
+        }
+        let user = User(dict: snapshot!.data()! as NSDictionary)
+        completion(user)
+    }
+}
+
 
 //MARK: Save user to firebase
 func saveUserToFirestore(_ user: User) {

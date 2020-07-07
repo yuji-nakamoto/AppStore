@@ -26,6 +26,8 @@
 		83489CBB24ACE07D002A8EA3 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83489CBA24ACE07D002A8EA3 /* ReviewTableViewCell.swift */; };
 		83489CBD24ACE08E002A8EA3 /* ReviewCountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83489CBC24ACE08E002A8EA3 /* ReviewCountTableViewCell.swift */; };
 		8350427824B4106700C8BF46 /* ReviewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8350427724B4106700C8BF46 /* ReviewTableViewController.swift */; };
+		8350427A24B4172A00C8BF46 /* OtherPeopleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8350427924B4172A00C8BF46 /* OtherPeopleTableViewController.swift */; };
+		8350427C24B4176F00C8BF46 /* OtherPeopleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8350427B24B4176F00C8BF46 /* OtherPeopleTableViewCell.swift */; };
 		835209EF24A4A45700648779 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835209EE24A4A45700648779 /* AppDelegate.swift */; };
 		835209F124A4A45700648779 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835209F024A4A45700648779 /* SceneDelegate.swift */; };
 		835209F624A4A45700648779 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 835209F424A4A45700648779 /* Main.storyboard */; };
@@ -73,6 +75,8 @@
 		83489CBA24ACE07D002A8EA3 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		83489CBC24ACE08E002A8EA3 /* ReviewCountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCountTableViewCell.swift; sourceTree = "<group>"; };
 		8350427724B4106700C8BF46 /* ReviewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewController.swift; sourceTree = "<group>"; };
+		8350427924B4172A00C8BF46 /* OtherPeopleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherPeopleTableViewController.swift; sourceTree = "<group>"; };
+		8350427B24B4176F00C8BF46 /* OtherPeopleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherPeopleTableViewCell.swift; sourceTree = "<group>"; };
 		835209EB24A4A45700648779 /* AppStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		835209EE24A4A45700648779 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		835209F024A4A45700648779 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -183,6 +187,7 @@
 				83489CAE24AA74EA002A8EA3 /* PurchasedTableViewController.swift */,
 				83489CB224AA7ECB002A8EA3 /* PurchaseConfirmationTableViewController.swift */,
 				8350427724B4106700C8BF46 /* ReviewTableViewController.swift */,
+				8350427924B4172A00C8BF46 /* OtherPeopleTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -224,6 +229,7 @@
 				83489CB024AA758D002A8EA3 /* PurchasedTableViewCell.swift */,
 				83489CBA24ACE07D002A8EA3 /* ReviewTableViewCell.swift */,
 				83489CBC24ACE08E002A8EA3 /* ReviewCountTableViewCell.swift */,
+				8350427B24B4176F00C8BF46 /* OtherPeopleTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -379,6 +385,7 @@
 				83489CB724AAEA34002A8EA3 /* Review.swift in Sources */,
 				83489CBD24ACE08E002A8EA3 /* ReviewCountTableViewCell.swift in Sources */,
 				83478B7B24A8512800C6311C /* EditTableViewController.swift in Sources */,
+				8350427A24B4172A00C8BF46 /* OtherPeopleTableViewController.swift in Sources */,
 				8347F26B24A6EDF7006B7D8A /* DetailCollectionViewCell.swift in Sources */,
 				83478B6B24A7BE0E00C6311C /* Cart.swift in Sources */,
 				83489CAF24AA74EA002A8EA3 /* PurchasedTableViewController.swift in Sources */,
@@ -386,6 +393,7 @@
 				835209EF24A4A45700648779 /* AppDelegate.swift in Sources */,
 				83478B7724A831EC00C6311C /* ProfileTableViewController.swift in Sources */,
 				83478B6F24A7DAD100C6311C /* CartTableViewCell.swift in Sources */,
+				8350427C24B4176F00C8BF46 /* OtherPeopleTableViewCell.swift in Sources */,
 				83489CB324AA7ECB002A8EA3 /* PurchaseConfirmationTableViewController.swift in Sources */,
 				83520A0E24A4CB7A00648779 /* FirebaseReference.swift in Sources */,
 				83478B7324A80B8200C6311C /* SearchTableViewController.swift in Sources */,

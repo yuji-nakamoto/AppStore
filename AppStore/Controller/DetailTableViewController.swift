@@ -23,7 +23,7 @@ class DetailTableViewController: UIViewController {
     var itemArray: [Item] = []
     var reviewArray: [Review] = []
     var itemImages: [UIImage] = []
-    var reviewIds: [String] = []
+    var userId = ""
     let hud = JGProgressHUD(style: .dark)
     var pleaceholderLbl = UILabel()
     var reviewIdArray: [String] = []
@@ -148,6 +148,17 @@ class DetailTableViewController: UIViewController {
                     print("Error adding reviewIds", error!.localizedDescription)
                 }
             }
+        }
+    }
+    
+    //MARK: Prepare
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "otherVC" {
+            
+            let otherVC = segue.destination as! OtherPeopleTableViewController
+            otherVC.userId = userId
         }
     }
     
@@ -289,6 +300,16 @@ extension DetailTableViewController: UITableViewDelegate, UITableViewDataSource 
         
         cell3.generateCell(reviewArray[indexPath.row - 2])
         return cell3
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let indexNumber = indexPath.row
+        if indexNumber > 1 {
+            
+            userId = reviewArray[indexPath.row - 2].id
+            performSegue(withIdentifier: "otherVC", sender: nil)
+        }
     }
 }
 

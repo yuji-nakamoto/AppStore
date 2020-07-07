@@ -48,7 +48,7 @@ class ProfileTableViewController: UITableViewController {
         profileImageButton.layer.cornerRadius = 5
         profileImageView.layer.cornerRadius = 35
         profileImageView.layer.borderWidth = 3
-        profileImageView.layer.borderColor = UIColor.white.cgColor
+        profileImageView.layer.borderColor = UIColor.systemBackground.cgColor
         
         activityIndicator = NVActivityIndicatorView(frame: CGRect(x: self.view.frame.width / 2 - 30, y: self.view.frame.height / 2 - 30, width: 60.0, height: 60.0), type: .ballClipRotatePulse, color: UIColor(named: "original yellow"), padding: nil)
     }
