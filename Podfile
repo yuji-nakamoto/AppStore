@@ -16,10 +16,6 @@ target 'AppStore' do
   pod 'NVActivityIndicatorView/AppExtension'
   pod 'JGProgressHUD'
   pod 'SDWebImage', '~> 5.0'
-  pod 'FBSDKLoginKit', '~> 6.3'
-  pod 'GoogleSignIn'
-  pod 'SideMenu'
-  pod 'Firebase/Messaging'
-
+  pod 'Google-Mobile-Ads-SDK'
 
 end

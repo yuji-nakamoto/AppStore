@@ -112,10 +112,9 @@ extension CartTableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let indexNumber = indexPath.row
         var totalPrice = 0
         
-        if indexNumber == 0 {
+        if indexPath.row == 0 {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! TotalPriceTableViewCell
             
@@ -135,8 +134,7 @@ extension CartTableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        let indexNumber = indexPath.row
-        if indexNumber == 0 {
+        if indexPath.row == 0 {
             return 61
         }
         return UITableView.automaticDimension
@@ -168,7 +166,6 @@ extension CartTableViewController: UITableViewDelegate, UITableViewDataSource {
                 if error != nil {
                     print("error updating the basket", error!.localizedDescription)
                 }
-                
                 self.getCarItems()
             }
         }
@@ -184,7 +181,6 @@ extension CartTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
         return NSAttributedString(string: "お客様のショッピングカートに商品はありません。", attributes: attributes)
     }
 
-    
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
         return NSAttributedString(string: "商品カテゴリー、または検索から買い物が行えます。")

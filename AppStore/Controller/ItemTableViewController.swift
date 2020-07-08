@@ -8,6 +8,7 @@
 
 import UIKit
 import EmptyDataSet_Swift
+import GoogleMobileAds
 
 class ItemTableViewController: UIViewController {
     
@@ -25,9 +26,7 @@ class ItemTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.emptyDataSetSource = self
-        tableView.emptyDataSetDelegate = self
-        collectionDelegete()
+        delegete()
         loadCategory()
         loadItems()
         setupUI()
@@ -86,10 +85,12 @@ class ItemTableViewController: UIViewController {
     
     //MARK: Delegete
     
-    private func collectionDelegete() {
+    private func delegete() {
         
         collectionView.delegate = self
         collectionView.dataSource = self
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
     }
     
     //MARK: Prepare Function
@@ -111,8 +112,8 @@ class ItemTableViewController: UIViewController {
     @objc func refreshTableView(){
         
         DispatchQueue.main.async {
-            self.tableView.reloadData()
-            self.collectionView.reloadData()
+            self.loadCategory()
+            self.loadItems()
         }
         refresh.endRefreshing()
     }
@@ -153,26 +154,34 @@ extension ItemTableViewController:  UICollectionViewDataSource, UICollectionView
 extension ItemTableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemArray.count
+        return itemArray.count == 0 ? 0 : 1 + itemArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+                
+        if indexPath.row == 0 {
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "BannerCell", for: indexPath)
+            let bannerView = cell.viewWithTag(1) as! GADBannerView
+            bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+            bannerView.rootViewController = self
+            bannerView.load(GADRequest())
+            
+            return cell
+        }
+        let cell2 = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ItemTableViewCell
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ItemTableViewCell
+        cell2.generateCell(itemArray[indexPath.row - 1])
         
-        cell.generateCell(itemArray[indexPath.row])
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        return 200
+        return cell2
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        performSegue(withIdentifier: "detailVC", sender: itemArray[indexPath.row])
+                
+        if indexPath.row > 0 {
+            
+            performSegue(withIdentifier: "detailVC", sender: itemArray[indexPath.row - 1])
+        }
     }
     
 }

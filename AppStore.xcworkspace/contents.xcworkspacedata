@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:AppStore.xcodeproj">
+      location = "group:/Users/yuji_nakamoto/Library/Mobile Documents/com~apple~CloudDocs/SwiftApp/AppStore/StoreApp.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

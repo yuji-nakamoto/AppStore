@@ -25,7 +25,7 @@ class ReviewTableViewCell: UITableViewCell {
         reviewLabel.text = review.reviewString
         nameLabel.text = review.fullname
         
-        profileImageView.sd_setImage(with: URL(string: review.profileImageUrl), placeholderImage: UIImage(named: "placeholder-person"))
+        profileImageView.sd_setImage(with: URL(string: review.profileImageUrl))
         
         if backView != nil {
             
@@ -36,21 +36,12 @@ class ReviewTableViewCell: UITableViewCell {
             
             if review.imageUrls != nil && review.imageUrls.count > 0 {
                 downloadImages(imageUrls: [review.imageUrls.first!]) { (images) in
-                    self.itemImageView.image = images.first as? UIImage
+                    DispatchQueue.main.async {
+                        self.itemImageView.image = images.first as? UIImage
+                    }
                 }
             }
         }
     }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
-    }
-    
+
 }

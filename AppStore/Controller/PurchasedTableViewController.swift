@@ -21,6 +21,7 @@ class PurchasedTableViewController: UIViewController {
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
         tableView.tableFooterView = UIView()
+        self.title = "注文履歴"
     }
     
     override func viewDidAppear(_ animated: Bool) {

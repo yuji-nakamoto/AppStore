@@ -8,6 +8,7 @@
 
 import UIKit
 import JGProgressHUD
+import GoogleMobileAds
 
 class DetailTableViewController: UIViewController {
     
@@ -48,17 +49,6 @@ class DetailTableViewController: UIViewController {
         loadReviewFromFirestore()
     }
     
-    //MARK: Setup UI
-    
-    private func setupUI() {
-        
-        self.title = "商品の詳細"
-        tableView.tableFooterView = UIView()
-        reviewButton.layer.cornerRadius = 5
-        backView.layer.borderWidth = 1
-        backView.layer.borderColor = UIColor.systemGray4.cgColor
-    }
-    
     //MARK: IBAction
     
     @IBAction func reviewButtonPressed(_ sender: Any) {
@@ -84,7 +74,7 @@ class DetailTableViewController: UIViewController {
     
     //MARK: Load Review
     
-    private func loadReviewFromFirestore() {
+    func loadReviewFromFirestore() {
         
         downloadReviewFromFirebase(item.id) { (allReview) in
             self.reviewArray = allReview
@@ -118,14 +108,10 @@ class DetailTableViewController: UIViewController {
         itemIdArray.removeAll()
         
         let review = Review()
-        review.reviewId = UUID().uuidString
-        review.reviewString = textView.text
-        review.id = currentUser?.objectId
-        review.itemId = item.id
-        review.fullname = currentUser?.fullName
-        review.profileImageUrl = currentUser?.profileImageUrl
-        review.imageUrls = item.imageUrls
-        review.name = item.name
+        review.reviewId = UUID().uuidString; review.reviewString = textView.text
+        review.id = currentUser?.objectId; review.itemId = item.id
+        review.fullname = currentUser?.fullName; review.profileImageUrl = currentUser?.profileImageUrl
+        review.imageUrls = item.imageUrls; review.name = item.name
         reviewIdArray.append(review.reviewId)
         itemIdArray.append(review.itemId)
         saveReviewToFirestore(review)
@@ -140,7 +126,18 @@ class DetailTableViewController: UIViewController {
         dismissView()
     }
     
-    //MARK: Helper Function
+    //MARK: Prepare
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "otherVC" {
+            
+            let otherVC = segue.destination as! OtherPeopleTableViewController
+            otherVC.userId = userId
+        }
+    }
+    
+    //MARK: Add Id Array
     
     private func addIdArray(_ reviewIds: [String], _ itemIds: [String]) {
         
@@ -156,94 +153,7 @@ class DetailTableViewController: UIViewController {
             }
         }
     }
-    
-    //MARK: Prepare
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "otherVC" {
-            
-            let otherVC = segue.destination as! OtherPeopleTableViewController
-            otherVC.userId = userId
-        }
-    }
-    
-    private func dismissView() {
-        
-        textView.resignFirstResponder()
-        textView.text = ""
-        self.animationView.isHidden = !self.animationView.isHidden
-        loadReviewFromFirestore()
-        scrollToBottom()
-    }
-    
-    func scrollToBottom() {
-        
-        let index = IndexPath(row: reviewArray.count, section: 0)
-        tableView.scrollToRow(at: index, at: UITableView.ScrollPosition.bottom, animated: true)
-    }
-    
-    private func hudError() {
-        
-        hud.indicatorView = JGProgressHUDErrorIndicatorView()
-        hud.show(in: self.view)
-        hud.dismiss(afterDelay: 2.0)
-    }
-    
-    private func hudSuccess() {
-        
-        hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-        hud.show(in: self.view)
-        hud.dismiss(afterDelay: 2.0)
-    }
-    
-    private func textViewHaveText() -> Bool {
-        return textView.text != ""
-    }
-    
-    private func setupTextView() {
-        
-        textView.delegate = self
-        pleaceholderLbl.isHidden = false
-        
-        let pleaceholderX: CGFloat = self.view.frame.size.width / 75
-        let pleaceholderY: CGFloat = -50
-        let pleaceholderWidth: CGFloat = textView.bounds.width - pleaceholderX
-        let pleaceholderHeight: CGFloat = textView.bounds.height
-        let pleaceholderFontSize = self.view.frame.size.width / 25
-        
-        pleaceholderLbl.frame = CGRect(x: pleaceholderX, y: pleaceholderY, width: pleaceholderWidth, height: pleaceholderHeight)
-        pleaceholderLbl.text = "気に入ったことや、気に入らなかったこと"
-        pleaceholderLbl.font = UIFont(name: "HelveticaNeue", size: pleaceholderFontSize)
-        pleaceholderLbl.textColor = .systemGray4
-        pleaceholderLbl.textAlignment = .left
-        
-        textView.addSubview(pleaceholderLbl)
-    }
-    
-    func setupKeyboard() {
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-    }
-    
-    @objc func adjustForKeyboard(notification: Notification) {
-        let userInfo = notification.userInfo!
-        let keyboardScreenEndFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, to: view.window)
-        
-        if notification.name == UIResponder.keyboardWillHideNotification {
-            bottomConstraint.constant = 0
-        } else {
-            if #available(iOS 11.0, *) {
-                bottomConstraint.constant = view.safeAreaInsets.bottom - keyboardViewEndFrame.height
-            } else {
-                bottomConstraint.constant = keyboardViewEndFrame.height
-            }
-            view.layoutIfNeeded()
-        }
-    }
-    
+
 }
 
 //MARK: CollectionView Function
@@ -277,14 +187,12 @@ extension DetailTableViewController:  UICollectionViewDataSource, UICollectionVi
 extension DetailTableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1 + 1 + reviewArray.count
+        return 1 + 1 + 1 + reviewArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let indexNumber = indexPath.row
-        
-        if indexNumber == 0 {
+                
+        if indexPath.row == 0 {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! DetailTableViewCell
             
@@ -294,42 +202,36 @@ extension DetailTableViewController: UITableViewDelegate, UITableViewDataSource 
             
             return cell
             
-        } else if indexNumber == 1 {
+        } else if indexPath.row == 1 {
+            
+            let bannerCell = tableView.dequeueReusableCell(withIdentifier: "BannerCell", for: indexPath)
+            let bannerView = bannerCell.viewWithTag(1) as! GADBannerView
+            bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+            bannerView.rootViewController = self
+            bannerView.load(GADRequest())
+            
+            return bannerCell
+            
+        } else if indexPath.row == 2 {
             
             let cell2 = tableView.dequeueReusableCell(withIdentifier: "Cell2") as! ReviewCountTableViewCell
             
             cell2.reviewCountLabel.text = String(reviewArray.count)
             return cell2
-            
         }
         let cell3 = tableView.dequeueReusableCell(withIdentifier: "Cell3", for: indexPath) as! ReviewTableViewCell
         
-        cell3.generateCell(reviewArray[indexPath.row - 2])
+        cell3.generateCell(reviewArray[indexPath.row - 3])
         return cell3
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let indexNumber = indexPath.row
-        if indexNumber > 1 {
+        if indexPath.row > 2 {
             
-            userId = reviewArray[indexPath.row - 2].id
+            tableView.deselectRow(at: indexPath, animated: true)
+            userId = reviewArray[indexPath.row - 3].id
             performSegue(withIdentifier: "otherVC", sender: nil)
-        }
-    }
-}
-
-extension DetailTableViewController: UITextViewDelegate {
-    
-    func textViewDidChange(_ textView: UITextView) {
-        
-        let spacing = CharacterSet.whitespacesAndNewlines
-        
-        if !textView.text.trimmingCharacters(in: spacing).isEmpty {
-            
-            pleaceholderLbl.isHidden = true
-        } else {
-            pleaceholderLbl.isHidden = false
         }
     }
 }
