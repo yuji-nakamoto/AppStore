@@ -109,6 +109,7 @@ class ProfileTableViewController: UITableViewController {
             
             User.logoutUser { (error) in
                 if error != nil {
+                    
                     print("error logout user: \(error!.localizedDescription)")
                 }
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)

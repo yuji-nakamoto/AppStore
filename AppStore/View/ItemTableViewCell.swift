@@ -22,24 +22,11 @@ class ItemTableViewCell: UITableViewCell {
         
         if item.imageUrls != nil && item.imageUrls.count > 0 {
             downloadImages(imageUrls: [item.imageUrls.first!]) { (images) in
-                self.tableImageView.image = images.first as? UIImage
+                DispatchQueue.main.async {
+                    self.tableImageView.image = images.first as? UIImage
+                }
             }
         }
     }
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        tableImageView.image = UIImage(named: "Placeholder-image")
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-    }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        tableImageView.image = UIImage(named: "Placeholder-image")
-    }
-
 }
